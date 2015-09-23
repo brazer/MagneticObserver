@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Magnetic Observer</string>
-    <string name="title_activity_main">Last Notification</string>
+    <string name="title_activity_main">Magnetic Observer</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="gcm_defaultSenderId">605886921707</string>
     <string name="title_notification">Magnetic Notification</string>
