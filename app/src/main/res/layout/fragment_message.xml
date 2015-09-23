@@ -4,9 +4,13 @@
     android:layout_height="match_parent"
     tools:context="by.org.cgm.magneticobserver.ui.FragmentMessage">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/fragment_message__message"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:text="@string/message_no_event"
+        android:textAllCaps="true"
+        android:gravity="center"
+        style="@android:style/TextAppearance.DeviceDefault.Large" />
 
 </FrameLayout>

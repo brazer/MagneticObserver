@@ -5,10 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +19,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import by.org.cgm.magneticobserver.R;
+import by.org.cgm.magneticobserver.models.MagMessage;
 import by.org.cgm.magneticobserver.services.RegistrationIntentService;
+import by.org.cgm.magneticobserver.utils.FragmentTags;
+import by.org.cgm.magneticobserver.utils.FragmentUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
         }
+
+        showMessageFragment();
     }
 
     @Override
@@ -83,6 +89,20 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void showMessageFragment() {
+        Fragment fragment = new FragmentMessage();
+        Intent intent = getIntent();
+        if (intent != null) {
+            MagMessage magMessage = (MagMessage) intent.getSerializableExtra(MagMessage.TAG);
+            if (magMessage != null) {
+                Bundle args = new Bundle();
+                args.putSerializable(MagMessage.TAG, magMessage);
+                fragment.setArguments(args);
+            }
+        }
+        FragmentUtils.replaceContent(this, R.id.container, fragment, FragmentTags.MESSAGE);
     }
 
     @Override

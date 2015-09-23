@@ -13,7 +13,9 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import by.org.cgm.magneticobserver.R;
+import by.org.cgm.magneticobserver.models.MagMessage;
 import by.org.cgm.magneticobserver.ui.MainActivity;
+import by.org.cgm.magneticobserver.utils.StringUtils;
 
 /**
  * Author: Anatol Salanevich
@@ -22,6 +24,7 @@ import by.org.cgm.magneticobserver.ui.MainActivity;
 public class CustomGcmListenerService extends GcmListenerService {
 
     private static final String TAG = CustomGcmListenerService.class.getSimpleName();
+    private MagMessage mMagMessage;
 
     /**
      * Called when message is received.
@@ -43,12 +46,12 @@ public class CustomGcmListenerService extends GcmListenerService {
          *     - Store message in local database.
          *     - Update UI.
          */
-        //// TODO: 14.08.2015  process of data
+        mMagMessage = StringUtils.parse(message);
         /**
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(message);
+        sendNotification(mMagMessage.toShortMessage(getString(R.string.short_message)));
     }
     // [END receive_message]
 
@@ -60,6 +63,7 @@ public class CustomGcmListenerService extends GcmListenerService {
     private void sendNotification(String message) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(MagMessage.TAG, mMagMessage);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
