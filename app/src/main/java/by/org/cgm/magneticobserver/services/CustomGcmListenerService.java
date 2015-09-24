@@ -52,7 +52,7 @@ public class CustomGcmListenerService extends GcmListenerService {
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.
          */
-        sendNotification(mMagMessage.toShortMessage(getString(R.string.short_message)));
+        sendNotification(mMagMessage.toMessage(getString(R.string.message)));
     }
     // [END receive_message]
 

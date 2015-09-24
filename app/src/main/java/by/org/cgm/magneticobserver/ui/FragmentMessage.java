@@ -17,7 +17,10 @@ import by.org.cgm.magneticobserver.models.MagMessage;
  */
 public class FragmentMessage extends Fragment {
 
-    @Bind(R.id.fragment_message__message) TextView mMessageTv;
+    @Bind(R.id.fragment_message__level) TextView mLevelTv;
+    @Bind(R.id.fragment_message__date) TextView mDateTv;
+    @Bind(R.id.fragment_message__begin) TextView mBeginTv;
+    @Bind(R.id.fragment_message__end) TextView mEndTv;
 
     public FragmentMessage() {
         // Required empty public constructor
@@ -38,7 +41,11 @@ public class FragmentMessage extends Fragment {
         if (args != null) {
             MagMessage magMessage = (MagMessage) args.getSerializable(MagMessage.TAG);
             if (magMessage != null) {
-                mMessageTv.setText(magMessage.toMessage(getString(R.string.message)));
+                mLevelTv.setText(magMessage.getStormLevel());
+                mLevelTv.setBackgroundColor(getResources().getColor(magMessage.getColorId()));
+                mDateTv.setText(magMessage.getDate());
+                mBeginTv.setText(magMessage.getBegin());
+                mEndTv.setText(magMessage.getEnd());
             }
         }
     }

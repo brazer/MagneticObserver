@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Gray colors -->
+    <color name="gray1">#dde3e9</color>
+    <color name="gray2">#d5dbe2</color>
+    <color name="gray3">#c9d0da</color>
+    <color name="gray4">#c3cad5</color>
+
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+
+    <!-- Spectrum -->
+    <color name="color_quiet">#2AE000</color>
+    <color name="color_low_storm">#CFC100</color>
+    <color name="color_moderate_storm">#CB9000</color>
+    <color name="color_high_storm">#C76200</color>
+    <color name="color_very_high_storm">#BF0900</color>
+
+</resources>

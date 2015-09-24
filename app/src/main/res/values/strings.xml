@@ -6,10 +6,12 @@
     <string name="gcm_defaultSenderId" translatable="false">605886921707</string>
     <string name="title_notification">New magnetic event</string>
 
-    <string name="short_message">Magnetic level is %1$s</string>
-    <string name="message">For period from %1$s to %2$s at %3$s magnetic level is %4$s</string>
+    <string name="message">Magnetic level is %1$s</string>
     <string name="message_no_event">No event…</string>
     <string name="no_token_retrieved_message">An error occurred while either fetching the InstanceID token. Please try running the app again.</string>
+    <string name="today">Today</string>
+    <string name="begin">Begin</string>
+    <string name="end">End</string>
 
     <string-array name="storm_level">
         <item>quiet</item>

@@ -2,17 +2,19 @@
 <resources>
     <string name="app_name">Магнитный обозреватель</string>
     <string name="action_settings">Настройки</string>
-    <string name="message">За период от %1$s до %2$s %3$s магнитный уровень - %4$s</string>
+    <string name="message">Магнитный уровень - %1$s</string>
     <string name="message_no_event">Нет событий…</string>
-    <string name="short_message">Магнитный уровень - %1$s</string>
     <string-array name="storm_level">
         <item>тихо</item>
-        <item>маленькая буря</item>
-        <item>буря</item>
+        <item>небольшая буря</item>
+        <item>умеренная буря</item>
         <item>большая буря</item>
         <item>очень большая буря</item>
     </string-array>
     <string name="title_notification">Новое магнитное событие</string>
     <string name="no_token_retrieved_message">Получена ошибка при регистрации сервиса. Попробуйте запустить приложение позже.</string>
     <string name="title_activity_main">Магнитный обозреватель</string>
+    <string name="begin">Начало</string>
+    <string name="end">Конец</string>
+    <string name="today">Сегодня</string>
 </resources>

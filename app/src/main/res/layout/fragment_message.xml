@@ -1,16 +1,51 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="by.org.cgm.magneticobserver.ui.FragmentMessage">
+    tools:context="by.org.cgm.magneticobserver.ui.FragmentMessage"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/fragment_message__message"
+        android:id="@+id/fragment_message__date"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/today"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:background="@color/gray4"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/fragment_message__begin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/begin"
+        android:textColor="@color/black"
+        android:background="@color/gray2"/>
+
+    <TextView
+        android:id="@+id/fragment_message__level"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
         android:text="@string/message_no_event"
         android:textAllCaps="true"
         android:gravity="center"
-        style="@android:style/TextAppearance.DeviceDefault.Large" />
+        style="@android:style/TextAppearance.DeviceDefault.Large"
+        android:background="@color/white"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/fragment_message__end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/end"
+        android:textColor="@color/black"
+        android:background="@color/gray2"/>
+
+</LinearLayout>

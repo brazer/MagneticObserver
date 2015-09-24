@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
 import by.org.cgm.magneticobserver.AppCache;
+import by.org.cgm.magneticobserver.R;
+import lombok.Getter;
 import lombok.SneakyThrows;
 
 /**
@@ -18,9 +20,9 @@ public class MagMessage implements Serializable {
 
     public static final String TAG = "MagMessage";
 
-    private String begin;
-    private String end;
-    private String date;
+    @Getter private String begin;
+    @Getter private String end;
+    @Getter private String date;
     private int value;
 
     @SneakyThrows(ParseException.class)
@@ -37,14 +39,10 @@ public class MagMessage implements Serializable {
     }
 
     public String toMessage(String template) {
-        return String.format(template, begin, end, date, getStormLevel());
-    }
-
-    public String toShortMessage(String template) {
         return String.format(template, getStormLevel());
     }
 
-    private String getStormLevel() {
+    public String getStormLevel() {
         String levels[] = AppCache.getInstance().getLevels();
         switch (value) {
             case 0: return levels[0];
@@ -60,4 +58,21 @@ public class MagMessage implements Serializable {
         }
         return "";
     }
+
+    public int getColorId() {
+        switch (value) {
+            case 0: return R.color.color_quiet;
+            case 1: return R.color.color_quiet;
+            case 2: return R.color.color_low_storm;
+            case 3: return R.color.color_low_storm;
+            case 4: return R.color.color_moderate_storm;
+            case 5: return R.color.color_moderate_storm;
+            case 6: return R.color.color_high_storm;
+            case 7: return R.color.color_high_storm;
+            case 8: return R.color.color_very_high_storm;
+            case 9: return R.color.color_very_high_storm;
+        }
+        return R.color.white;
+    }
+
 }
