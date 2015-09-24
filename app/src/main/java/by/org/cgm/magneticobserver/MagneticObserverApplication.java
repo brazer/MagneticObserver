@@ -13,5 +13,7 @@ public class MagneticObserverApplication extends Application {
         super.onCreate();
 
         AppCache.initialize();
+        AppCache.getInstance().setLevels(getResources().getStringArray(R.array.storm_level));
     }
+
 }

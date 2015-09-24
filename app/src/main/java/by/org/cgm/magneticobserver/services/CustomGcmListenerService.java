@@ -47,6 +47,7 @@ public class CustomGcmListenerService extends GcmListenerService {
          *     - Update UI.
          */
         mMagMessage = StringUtils.parse(message);
+        mMagMessage.convertToLocalTime();
         /**
          * In some cases it may be useful to show a notification indicating to the user
          * that a message was received.

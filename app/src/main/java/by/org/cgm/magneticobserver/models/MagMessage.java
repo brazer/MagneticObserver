@@ -1,6 +1,14 @@
 package by.org.cgm.magneticobserver.models;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
+import by.org.cgm.magneticobserver.AppCache;
+import lombok.SneakyThrows;
 
 /**
  * Author: Anatol Salanevich
@@ -15,11 +23,41 @@ public class MagMessage implements Serializable {
     private String date;
     private int value;
 
+    @SneakyThrows(ParseException.class)
+    public void convertToLocalTime() {
+        DateFormat format = new SimpleDateFormat("HH:mm");
+        format.setTimeZone(TimeZone.getTimeZone("UTC"));
+        begin = convert(new Time(format.parse(begin).getTime()));
+        end = convert(new Time(format.parse(end).getTime()));
+    }
+
+    private String convert(Time time) {
+        DateFormat mskFormat = new SimpleDateFormat("HH:mm");
+        return mskFormat.format(time);
+    }
+
     public String toMessage(String template) {
-        return String.format(template, begin, end, date, value);
+        return String.format(template, begin, end, date, getStormLevel());
     }
 
     public String toShortMessage(String template) {
-        return String.format(template, value);
+        return String.format(template, getStormLevel());
+    }
+
+    private String getStormLevel() {
+        String levels[] = AppCache.getInstance().getLevels();
+        switch (value) {
+            case 0: return levels[0];
+            case 1: return levels[0];
+            case 2: return levels[1];
+            case 3: return levels[1];
+            case 4: return levels[2];
+            case 5: return levels[2];
+            case 6: return levels[3];
+            case 7: return levels[3];
+            case 8: return levels[4];
+            case 9: return levels[4];
+        }
+        return "";
     }
 }
