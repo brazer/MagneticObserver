@@ -1,14 +1,15 @@
 <resources>
-    <string name="app_name" translatable="false">Magnetic Observer</string>
+    <string name="app_name">Magnetic Observer</string>
     <string name="title_activity_main">Magnetic Observer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="gcm_defaultSenderId">605886921707</string>
-    <string name="title_notification" translatable="false">New magnetic event</string>
+    <string name="gcm_defaultSenderId" translatable="false">605886921707</string>
+    <string name="title_notification">New magnetic event</string>
 
     <string name="short_message">Magnetic level is %1$s</string>
     <string name="message">For period from %1$s to %2$s at %3$s magnetic level is %4$s</string>
     <string name="message_no_event">No event…</string>
+    <string name="no_token_retrieved_message">An error occurred while either fetching the InstanceID token. Please try running the app again.</string>
 
     <string-array name="storm_level">
         <item>quiet</item>

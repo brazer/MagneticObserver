@@ -42,10 +42,8 @@ public class MainActivity extends AppCompatActivity {
                         PreferenceManager.getDefaultSharedPreferences(context);
                 boolean gotToken = sharedPreferences
                         .getBoolean(RegistrationIntentService.GOT_TOKEN, false);
-                if (gotToken) {
-                    Toast.makeText(context, "Token retrieved. You can use the service.", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "An error occurred while either fetching the InstanceID token. Please try running the app again.", Toast.LENGTH_LONG).show();
+                if (!gotToken) {
+                    Toast.makeText(context, R.string.no_token_retrieved_message, Toast.LENGTH_LONG).show();
                 }
             }
         };
