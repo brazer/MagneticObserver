@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'salanevich'
+            keyPassword 'Salanevich1983'
+            storeFile file('C:/Users/User/salanevich.jks')
+            storePassword 'Salanevich1983'
+        }
+    }
     compileSdkVersion 22
     buildToolsVersion "23.0.1"
-
     defaultConfig {
         applicationId "by.org.cgm.magneticobserver"
         minSdkVersion 15
