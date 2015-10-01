@@ -17,4 +17,5 @@
     <string name="begin">Начало</string>
     <string name="end">Конец</string>
     <string name="today">Сегодня</string>
+    <string name="loading">Загрузка…</string>
 </resources>

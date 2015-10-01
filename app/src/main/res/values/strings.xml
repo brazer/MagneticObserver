@@ -12,6 +12,7 @@
     <string name="today">Today</string>
     <string name="begin">Begin</string>
     <string name="end">End</string>
+    <string name="loading">Loading…</string>
 
     <string-array name="storm_level">
         <item>quiet</item>

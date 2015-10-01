@@ -48,12 +48,14 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        if (checkPlayServices()) {
+        //// TODO: 01.10.2015 uncomment
+        /*if (checkPlayServices()) {
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
-        }
+        }*/
 
-        showMessageFragment();
+        showCharts();
+        //todo: showMessageFragment();
     }
 
     @Override
@@ -87,6 +89,11 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void showCharts() {
+        Fragment fragment = new ChartsFragment();
+        FragmentUtils.replaceContent(this, R.id.container, fragment, FragmentTags.CHARTS);
     }
 
     private void showMessageFragment() {
