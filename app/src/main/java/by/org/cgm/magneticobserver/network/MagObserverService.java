@@ -13,4 +13,7 @@ public interface MagObserverService {
     @GET(ApiConstants.GET_DATA)
     void getDataRequest(Callback<GetDataResponse> callback);
 
+    @GET(ApiConstants.GET_MIDDLE)
+    void getMiddleRequest(Callback<GetDataResponse> callback);
+
 }

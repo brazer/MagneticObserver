@@ -16,8 +16,10 @@ public class AppCache {
 
     @Setter @Getter
     private String[] levels;
-    @Setter @Getter
+    @Setter
     private ArrayList<Data> data;
+    @Setter
+    private ArrayList<Data> middle;
 
     private AppCache() {}
 
@@ -29,4 +31,11 @@ public class AppCache {
         return sInstance;
     }
 
+    public ArrayList<Data> getMiddle() {
+        return middle;
+    }
+
+    public ArrayList<Data> getData() {
+        return data;
+    }
 }

@@ -16,4 +16,8 @@ public class StringUtils {
         return new Gson().fromJson(json, MagMessage.class);
     }
 
+    public static String toDoubleDigits(int val) {
+        return (val<10) ? "0" + val : String.valueOf(val);
+    }
+
 }

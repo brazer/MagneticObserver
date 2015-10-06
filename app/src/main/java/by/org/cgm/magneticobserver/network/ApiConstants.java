@@ -9,5 +9,6 @@ public final class ApiConstants {
     public static final String BASE_URL = "http://192.168.0.41/magnetic_observer";
 
     public static final String GET_DATA = "/get_data.php";
+    public static final String GET_MIDDLE = "/get_middle.php";
 
 }
