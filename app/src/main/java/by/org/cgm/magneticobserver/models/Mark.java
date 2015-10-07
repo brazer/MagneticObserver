@@ -12,10 +12,14 @@ public class Mark {
     @Getter private int id;
     public String begin;
     public String end;
-    public int mark;
+    public int level;
 
     public Mark() {
         id = ++count;
+    }
+
+    public static void reset() {
+        count = 0;
     }
 
 }

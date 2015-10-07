@@ -4,18 +4,24 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.Bind;
 import by.org.cgm.magneticobserver.AppCache;
@@ -25,6 +31,7 @@ import by.org.cgm.magneticobserver.models.Data;
 import by.org.cgm.magneticobserver.models.Mark;
 import by.org.cgm.magneticobserver.models.response.GetDataResponse;
 import by.org.cgm.magneticobserver.network.API;
+import by.org.cgm.magneticobserver.utils.ColorUtils;
 import by.org.cgm.magneticobserver.utils.StringUtils;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -36,7 +43,7 @@ import retrofit.client.Response;
 public class ChartsFragment extends BaseFragment {
 
     @Bind(R.id.fragment_charts__chart1) LineChart mChartLc1;
-    @Bind(R.id.fragment_charts__chart2) LineChart mChartLc2;
+    @Bind(R.id.fragment_charts__chart2) BarChart mChartBc2;
     private ProgressDialog mProgressDialog;
     private ArrayList<Data> data = new ArrayList<>();
     private ArrayList<Mark> marks = new ArrayList<>();
@@ -57,10 +64,11 @@ public class ChartsFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         mProgressDialog =
                 ProgressDialog.show(getActivity(), StringUtils.EMPTY, getString(R.string.loading));
-        API.getInstance().getService().getDataRequest(new GetDataCallback());
+        String today = (String) DateFormat.format("yyyy-MM-dd", new Date());
+        API.getInstance().getService().getDataRequest(today, new GetDataCallback());
     }
 
-    private void setData() {
+    private void setDataForLineChart() {
         ArrayList<String> xVals = new ArrayList<>();
         ArrayList<Entry> y1Vals = new ArrayList<>();
         ArrayList<Entry> y2Vals = new ArrayList<>();
@@ -92,8 +100,9 @@ public class ChartsFragment extends BaseFragment {
         dataSets.add(getDataSet(y2Vals, "По компоненте Y", Color.BLUE));
         dataSets.add(getDataSet(y3Vals, "По компоненте Z", Color.GREEN));
         LineData d = new LineData(xVals, dataSets);
-        mChartLc2.setData(d);
-        mChartLc2.invalidate();
+        mChartLc1.setData(d);
+        mChartLc1.animateX(2500);
+        mChartLc1.setDescription("Current geomagnetic data");
     }
 
     private LineDataSet getDataSet(ArrayList<Entry> yVals, String name, int color) {
@@ -116,6 +125,27 @@ public class ChartsFragment extends BaseFragment {
         return sum/vals.size();
     }
 
+    private void setDataForBarChart() {
+        ArrayList<String> xVals = new ArrayList<>();
+        ArrayList<BarEntry> yVals = new ArrayList<>();
+        int colors[] = new int[marks.size()];
+        for (int i = 0; i < marks.size(); i++) {
+            String xVal = String.valueOf(marks.get(i).getId());
+            xVals.add(xVal);
+            float yVal = marks.get(i).level;
+            yVals.add(new BarEntry(yVal, i));
+            colors[i] = ColorUtils.getColorRgb(marks.get(i).level);
+        }
+        BarDataSet set1 = new BarDataSet(yVals, "Marks");
+        set1.setColors(colors);
+        ArrayList<BarDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+        BarData data = new BarData(xVals, dataSets);
+        data.setValueTextSize(10f);
+        mChartBc2.setData(data);
+        mChartBc2.animateXY(2500, 2500);
+    }
+
     class GetDataCallback implements Callback<GetDataResponse> {
 
         @Override
@@ -123,7 +153,6 @@ public class ChartsFragment extends BaseFragment {
             Log.d(GetDataCallback.class.getSimpleName(), "success");
             data = getDataResponse;
             AppCache.getInstance().setData(getDataResponse);
-            setData();
             API.getInstance().getService().getMiddleRequest(new GetMiddleCallback());
         }
 
@@ -142,9 +171,12 @@ public class ChartsFragment extends BaseFragment {
             mProgressDialog.dismiss();
             Log.d(GetMiddleCallback.class.getSimpleName(), "success");
             AppCache.getInstance().setMiddle(getDataResponse);
+            Mark.reset();
             DataProcessing dataProcessing = new DataProcessing();
             dataProcessing.calculate();
             marks = dataProcessing.getMagMarks();
+            setDataForLineChart();
+            setDataForBarChart();
         }
 
         @Override
