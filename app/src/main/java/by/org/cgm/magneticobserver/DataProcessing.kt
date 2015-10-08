@@ -21,7 +21,7 @@ class DataProcessing() {
     var markX = 0
     var markY = 0
     var markZ = 0
-    var marks = ArrayList<Mark>()
+    val marks = ArrayList<Mark>()
 
     private fun reset() {
         maxDifX = 0.0
@@ -35,11 +35,11 @@ class DataProcessing() {
 
     fun calculate() {
         middleVals = AppCache.getInstance().middle
-        var data = AppCache.getInstance().data
+        val data = AppCache.getInstance().data
         var count = 0
-        var values = ArrayList<Data>()
+        val values = ArrayList<Data>()
         while (count < data!!.size()) {
-            var mark = Mark()
+            val mark = Mark()
             mark.begin = data[count].date + " " + StringUtils.toDoubleDigits(data[count].hour) + "" +
                     ":" + StringUtils.toDoubleDigits(data[count].minute)
             values.clear()
@@ -48,9 +48,8 @@ class DataProcessing() {
                 values.add(data[count])
                 count++
             }
-            val mult : Int = count / DATA_SIZE_FOR_DAY
-            var middleCount = count - mult * DATA_SIZE_FOR_DAY
-            if (mult == 0) middleCount -= PERIOD_IN_MINUTES
+            val mult : Int = (count - PERIOD_IN_MINUTES) / DATA_SIZE_FOR_DAY
+            val middleCount = count - mult * DATA_SIZE_FOR_DAY - PERIOD_IN_MINUTES
             calculateMarks(values, middleCount)
             mark.end = data[count].date + " " + StringUtils.toDoubleDigits(data[count].hour) + "" +
                     ":" + StringUtils.toDoubleDigits(data[count].minute)
