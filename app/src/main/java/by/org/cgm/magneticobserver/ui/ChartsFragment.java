@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import butterknife.Bind;
 import by.org.cgm.magneticobserver.AppCache;
@@ -32,6 +30,7 @@ import by.org.cgm.magneticobserver.models.Mark;
 import by.org.cgm.magneticobserver.models.response.GetDataResponse;
 import by.org.cgm.magneticobserver.network.API;
 import by.org.cgm.magneticobserver.utils.ColorUtils;
+import by.org.cgm.magneticobserver.utils.DateTimeUtils;
 import by.org.cgm.magneticobserver.utils.StringUtils;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -64,8 +63,8 @@ public class ChartsFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         mProgressDialog =
                 ProgressDialog.show(getActivity(), StringUtils.EMPTY, getString(R.string.loading));
-        String today = (String) DateFormat.format("yyyy-MM-dd", new Date());
-        API.getInstance().getService().getDataRequest(today, new GetDataCallback());
+        String day = DateTimeUtils.getYesterday();
+        API.getInstance().getService().getDataRequest(day, new GetDataCallback());
     }
 
     private void setDataForLineChart() {
