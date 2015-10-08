@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="by.org.cgm.magneticobserver.ui.ChartsFragment">
+    tools:context="by.org.cgm.magneticobserver.ui.fragments.ChartsFragment">
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/fragment_charts__chart1"

@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui;
+package by.org.cgm.magneticobserver.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

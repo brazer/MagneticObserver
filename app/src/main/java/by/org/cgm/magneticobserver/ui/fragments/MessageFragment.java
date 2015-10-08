@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui;
+package by.org.cgm.magneticobserver.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,14 +14,14 @@ import by.org.cgm.magneticobserver.models.MagMessage;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentMessage extends BaseFragment {
+public class MessageFragment extends BaseFragment {
 
     @Bind(R.id.fragment_message__level) TextView mLevelTv;
     @Bind(R.id.fragment_message__date) TextView mDateTv;
     @Bind(R.id.fragment_message__begin) TextView mBeginTv;
     @Bind(R.id.fragment_message__end) TextView mEndTv;
 
-    public FragmentMessage() {
+    public MessageFragment() {
         // Required empty public constructor
     }
 

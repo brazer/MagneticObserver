@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui;
+package by.org.cgm.magneticobserver.ui.activities;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -21,6 +21,8 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import by.org.cgm.magneticobserver.R;
 import by.org.cgm.magneticobserver.models.MagMessage;
 import by.org.cgm.magneticobserver.services.RegistrationIntentService;
+import by.org.cgm.magneticobserver.ui.fragments.ChartsFragment;
+import by.org.cgm.magneticobserver.ui.fragments.MessageFragment;
 import by.org.cgm.magneticobserver.utils.FragmentTags;
 import by.org.cgm.magneticobserver.utils.FragmentUtils;
 
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showMessageFragment() {
-        Fragment fragment = new FragmentMessage();
+        Fragment fragment = new MessageFragment();
         Intent intent = getIntent();
         if (intent != null) {
             MagMessage magMessage = (MagMessage) intent.getSerializableExtra(MagMessage.TAG);

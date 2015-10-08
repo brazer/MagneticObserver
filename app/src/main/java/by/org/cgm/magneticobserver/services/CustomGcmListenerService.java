@@ -14,7 +14,7 @@ import com.google.android.gms.gcm.GcmListenerService;
 
 import by.org.cgm.magneticobserver.R;
 import by.org.cgm.magneticobserver.models.MagMessage;
-import by.org.cgm.magneticobserver.ui.MainActivity;
+import by.org.cgm.magneticobserver.ui.activities.MainActivity;
 import by.org.cgm.magneticobserver.utils.StringUtils;
 
 /**

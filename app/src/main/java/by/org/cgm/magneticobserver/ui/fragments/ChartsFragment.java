@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui;
+package by.org.cgm.magneticobserver.ui.fragments;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
@@ -95,13 +95,14 @@ public class ChartsFragment extends BaseFragment {
             y3Vals.add(new Entry(val, i));
         }
         ArrayList<LineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(getDataSet(y1Vals, "По компоненте X", Color.RED));
-        dataSets.add(getDataSet(y2Vals, "По компоненте Y", Color.BLUE));
-        dataSets.add(getDataSet(y3Vals, "По компоненте Z", Color.GREEN));
+        dataSets.add(getDataSet(y1Vals, "H (av. " + (double) Math.round(avrX*10)/10 + ")", Color.RED));
+        dataSets.add(getDataSet(y2Vals, "D (av. " + (double) Math.round(avrY*10)/10 + ")", Color.BLUE));
+        dataSets.add(getDataSet(y3Vals, "Z (av. " + (double) Math.round(avrZ*10)/10 + ")", Color.GREEN));
         LineData d = new LineData(xVals, dataSets);
         mChartLc1.setData(d);
-        mChartLc1.animateX(2500);
         mChartLc1.setDescription("Current geomagnetic data");
+        mChartLc1.setHighlightEnabled(false);
+        mChartLc1.animateX(2500);
     }
 
     private LineDataSet getDataSet(ArrayList<Entry> yVals, String name, int color) {
@@ -129,19 +130,21 @@ public class ChartsFragment extends BaseFragment {
         ArrayList<BarEntry> yVals = new ArrayList<>();
         int colors[] = new int[marks.size()];
         for (int i = 0; i < marks.size(); i++) {
-            String xVal = String.valueOf(marks.get(i).getId());
+            String xVal = marks.get(i).begin + " - " + marks.get(i).end;//String.valueOf(marks.get(i).getId());
             xVals.add(xVal);
             float yVal = marks.get(i).level;
             yVals.add(new BarEntry(yVal, i));
             colors[i] = ColorUtils.getColorRgb(marks.get(i).level);
         }
-        BarDataSet set1 = new BarDataSet(yVals, "Marks");
+        BarDataSet set1 = new BarDataSet(yVals, "Ki");
         set1.setColors(colors);
         ArrayList<BarDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1);
         BarData data = new BarData(xVals, dataSets);
         data.setValueTextSize(10f);
         mChartBc2.setData(data);
+        mChartBc2.setDescription("К-index");
+        mChartBc2.setHighlightEnabled(false);
         mChartBc2.animateXY(2500, 2500);
     }
 
@@ -149,7 +152,6 @@ public class ChartsFragment extends BaseFragment {
 
         @Override
         public void success(GetDataResponse getDataResponse, Response response) {
-            Log.d(GetDataCallback.class.getSimpleName(), "success");
             data = getDataResponse;
             AppCache.getInstance().setData(getDataResponse);
             API.getInstance().getService().getMiddleRequest(new GetMiddleCallback());
@@ -168,7 +170,6 @@ public class ChartsFragment extends BaseFragment {
         @Override
         public void success(GetDataResponse getDataResponse, Response response) {
             mProgressDialog.dismiss();
-            Log.d(GetMiddleCallback.class.getSimpleName(), "success");
             AppCache.getInstance().setMiddle(getDataResponse);
             Mark.reset();
             DataProcessing dataProcessing = new DataProcessing();
