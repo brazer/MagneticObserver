@@ -20,4 +20,8 @@ public class StringUtils {
         return (val<10) ? "0" + val : String.valueOf(val);
     }
 
+    public static String formatDecimals(String template, float value) {
+        return String.format(template, (double) Math.round(value * 10) / 10);
+    }
+
 }

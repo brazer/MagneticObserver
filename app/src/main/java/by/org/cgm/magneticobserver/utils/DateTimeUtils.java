@@ -11,9 +11,21 @@ import java.util.Calendar;
 public class DateTimeUtils {
 
     public static String getYesterday() {
+        return getPastDay(-1);
+    }
+
+    public static String getPastDay(int count) {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, -1);
+        calendar.add(Calendar.DATE, count);
         return (String) DateFormat.format("yyyy-MM-dd", calendar.getTime());
+    }
+
+    public static String getDate(String datetime) {
+        return datetime.substring(0, 10);
+    }
+
+    public static String getTime(String datetime) {
+        return datetime.substring(11);
     }
 
 }

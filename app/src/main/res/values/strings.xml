@@ -21,5 +21,10 @@
         <item>big storm</item>
         <item>very big storm</item>
     </string-array>
+    <string name="line_chart_x">H (av. %1$s)</string>
+    <string name="line_chart_y">D (av. %1$s)</string>
+    <string name="line_chart_z">Z (av. %1$s)</string>
+    <string name="line_chart_desc">Current geomagnetic data</string>
+    <string name="bar_chart_desc">К-index</string>
 
 </resources>

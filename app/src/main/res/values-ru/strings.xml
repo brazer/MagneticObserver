@@ -5,7 +5,7 @@
     <string name="message">Магнитный уровень - %1$s</string>
     <string name="message_no_event">Нет событий…</string>
     <string-array name="storm_level">
-        <item>тихо</item>
+        <item>спокойно</item>
         <item>небольшая буря</item>
         <item>умеренная буря</item>
         <item>большая буря</item>
@@ -18,4 +18,9 @@
     <string name="end">Конец</string>
     <string name="today">Сегодня</string>
     <string name="loading">Загрузка…</string>
+    <string name="line_chart_x">H (ср. %1$s)</string>
+    <string name="line_chart_y">D (ср. %1$s)</string>
+    <string name="line_chart_z">D (ср. %1$s)</string>
+    <string name="bar_chart_desc">K-индекс</string>
+    <string name="line_chart_desc">Текущие геомагнитные данные</string>
 </resources>

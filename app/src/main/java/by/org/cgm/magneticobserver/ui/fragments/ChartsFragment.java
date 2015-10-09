@@ -18,10 +18,13 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.BindString;
 import by.org.cgm.magneticobserver.AppCache;
 import by.org.cgm.magneticobserver.DataProcessing;
 import by.org.cgm.magneticobserver.R;
@@ -46,6 +49,16 @@ public class ChartsFragment extends BaseFragment {
     private ProgressDialog mProgressDialog;
     private ArrayList<Data> data = new ArrayList<>();
     private ArrayList<Mark> marks = new ArrayList<>();
+    @BindString(R.string.line_chart_x) String mX;
+    @BindString(R.string.line_chart_y) String mY;
+    @BindString(R.string.line_chart_z) String mZ;
+
+    private ValueFormatter integerFormatter = new ValueFormatter() {
+        @Override
+        public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+            return String.valueOf((int)value);
+        }
+    };
 
     public ChartsFragment() {
         // Required empty public constructor
@@ -95,12 +108,12 @@ public class ChartsFragment extends BaseFragment {
             y3Vals.add(new Entry(val, i));
         }
         ArrayList<LineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(getDataSet(y1Vals, "H (av. " + (double) Math.round(avrX*10)/10 + ")", Color.RED));
-        dataSets.add(getDataSet(y2Vals, "D (av. " + (double) Math.round(avrY*10)/10 + ")", Color.BLUE));
-        dataSets.add(getDataSet(y3Vals, "Z (av. " + (double) Math.round(avrZ*10)/10 + ")", Color.GREEN));
+        dataSets.add(getDataSet(y1Vals, StringUtils.formatDecimals(mX, avrX), Color.RED));
+        dataSets.add(getDataSet(y2Vals, StringUtils.formatDecimals(mY, avrY), Color.BLUE));
+        dataSets.add(getDataSet(y3Vals, StringUtils.formatDecimals(mZ, avrZ), Color.GREEN));
         LineData d = new LineData(xVals, dataSets);
         mChartLc1.setData(d);
-        mChartLc1.setDescription("Current geomagnetic data");
+        mChartLc1.setDescription(getString(R.string.line_chart_desc));
         mChartLc1.setHighlightEnabled(false);
         mChartLc1.animateX(2500);
     }
@@ -130,20 +143,23 @@ public class ChartsFragment extends BaseFragment {
         ArrayList<BarEntry> yVals = new ArrayList<>();
         int colors[] = new int[marks.size()];
         for (int i = 0; i < marks.size(); i++) {
-            String xVal = marks.get(i).begin + " - " + marks.get(i).end;//String.valueOf(marks.get(i).getId());
+            String xVal = DateTimeUtils.getDate(marks.get(i).begin) + " (" +
+                    DateTimeUtils.getTime(marks.get(i).begin) + "-" +
+                    DateTimeUtils.getTime(marks.get(i).end) + ")";
             xVals.add(xVal);
             float yVal = marks.get(i).level;
             yVals.add(new BarEntry(yVal, i));
             colors[i] = ColorUtils.getColorRgb(marks.get(i).level);
         }
-        BarDataSet set1 = new BarDataSet(yVals, "Ki");
-        set1.setColors(colors);
+        BarDataSet set = new BarDataSet(yVals, "Ki");
+        set.setColors(colors);
+        set.setValueFormatter(integerFormatter);
         ArrayList<BarDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1);
+        dataSets.add(set);
         BarData data = new BarData(xVals, dataSets);
         data.setValueTextSize(10f);
         mChartBc2.setData(data);
-        mChartBc2.setDescription("К-index");
+        mChartBc2.setDescription(getString(R.string.bar_chart_desc));
         mChartBc2.setHighlightEnabled(false);
         mChartBc2.animateXY(2500, 2500);
     }
