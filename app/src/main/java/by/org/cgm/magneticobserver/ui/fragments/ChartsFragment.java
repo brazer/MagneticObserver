@@ -113,7 +113,7 @@ public class ChartsFragment extends BaseFragment {
         dataSets.add(getDataSet(y3Vals, StringUtils.formatDecimals(mZ, avrZ), Color.GREEN));
         LineData d = new LineData(xVals, dataSets);
         mChartLc1.setData(d);
-        mChartLc1.setDescription(getString(R.string.line_chart_desc));
+        if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
         mChartLc1.setHighlightEnabled(false);
         mChartLc1.animateX(2500);
     }
@@ -159,7 +159,7 @@ public class ChartsFragment extends BaseFragment {
         BarData data = new BarData(xVals, dataSets);
         data.setValueTextSize(10f);
         mChartBc2.setData(data);
-        mChartBc2.setDescription(getString(R.string.bar_chart_desc));
+        if (isAdded()) mChartBc2.setDescription(getString(R.string.bar_chart_desc));
         mChartBc2.setHighlightEnabled(false);
         mChartBc2.animateXY(2500, 2500);
     }
