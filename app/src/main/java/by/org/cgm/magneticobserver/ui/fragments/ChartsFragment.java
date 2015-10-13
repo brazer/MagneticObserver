@@ -99,7 +99,8 @@ public class ChartsFragment extends BaseFragment {
         for (int i = 0; i < data.size(); i++) {
             xVals.add(
                     data.get(i).getDate() + " " +
-                            data.get(i).getHour() + ":" + data.get(i).getMinute());
+                            StringUtils.toDoubleDigits(data.get(i).getHour()) + ":" +
+                            StringUtils.toDoubleDigits(data.get(i).getMinute()));
             float val = (float) data.get(i).getX() - avrX;
             y1Vals.add(new Entry(val, i));
             val = (float) data.get(i).getY() - avrY;
