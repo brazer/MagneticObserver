@@ -65,11 +65,11 @@ class DataProcessing() {
         var difZ : Double
         for (i in values!!.indices)
         {
-            difX = Math.abs(middleVals[count + i]!!.x - values[i].x)
+            difX = Math.abs(middleVals[count + i].x - values[i].x)
             if (difX > maxDifX) maxDifX = difX
-            difY = Math.abs(middleVals[count + i]!!.y - values[i].y)
+            difY = Math.abs(middleVals[count + i].y - values[i].y)
             if (difY > maxDifY) maxDifY = difY
-            difZ = Math.abs(middleVals[count + i]!!.z - values[i].z)
+            difZ = Math.abs(middleVals[count + i].z - values[i].z)
             if (difZ > maxDifZ) maxDifZ = difZ
         }
         setMarks()
