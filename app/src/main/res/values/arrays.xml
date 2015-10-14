@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="storm_level">
+        <item>quiet</item>
+        <item>small storm</item>
+        <item>moderate storm</item>
+        <item>big storm</item>
+        <item>very big storm</item>
+    </string-array>
+</resources>

@@ -12,13 +12,6 @@
     <string name="today">Today</string>
     <string name="begin">Begin</string>
     <string name="end">End</string>
-
-    <string-array name="storm_level">
-        <item>quiet</item>
-        <item>small storm</item>
-        <item>moderate storm</item>
-        <item>big storm</item>
-        <item>very big storm</item>
-    </string-array>
+    <string name="settings">Settings</string>
 
 </resources>

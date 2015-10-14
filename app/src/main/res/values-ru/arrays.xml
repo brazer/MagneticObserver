@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="storm_level">
+        <item>тихо</item>
+        <item>небольшая буря</item>
+        <item>умеренная буря</item>
+        <item>большая буря</item>
+        <item>очень большая буря</item>
+    </string-array>
+</resources>

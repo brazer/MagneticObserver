@@ -49,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        if (checkPlayServices()) {
+        /*if (checkPlayServices()) {
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
-        }
+        }*/
 
         showMessageFragment();
     }
@@ -120,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 
