@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui;
+package by.org.cgm.magneticobserver.ui.activities;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -21,6 +21,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import by.org.cgm.magneticobserver.R;
 import by.org.cgm.magneticobserver.models.MagMessage;
 import by.org.cgm.magneticobserver.services.RegistrationIntentService;
+import by.org.cgm.magneticobserver.ui.fragments.FragmentMessage;
 import by.org.cgm.magneticobserver.utils.FragmentTags;
 import by.org.cgm.magneticobserver.utils.FragmentUtils;
 

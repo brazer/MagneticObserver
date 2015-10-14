@@ -1,6 +1,6 @@
 package by.org.cgm.magneticobserver.utils;
 
-import by.org.cgm.magneticobserver.ui.FragmentMessage;
+import by.org.cgm.magneticobserver.ui.fragments.FragmentMessage;
 
 /**
  * Author: Anatol Salanevich
