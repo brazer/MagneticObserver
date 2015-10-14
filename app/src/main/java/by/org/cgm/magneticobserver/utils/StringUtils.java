@@ -11,9 +11,10 @@ import by.org.cgm.magneticobserver.models.MagMessage;
 public class StringUtils {
 
     public static final String EMPTY = "";
+    private static final Gson GSON = new Gson();
 
     public static MagMessage parse(String json) {
-        return new Gson().fromJson(json, MagMessage.class);
+        return GSON.fromJson(json, MagMessage.class);
     }
 
     public static String toDoubleDigits(int val) {

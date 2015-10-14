@@ -3,7 +3,6 @@ package by.org.cgm.magneticobserver.ui.fragments;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +39,7 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link BaseFragment} subclass.
  */
 public class ChartsFragment extends BaseFragment {
 
