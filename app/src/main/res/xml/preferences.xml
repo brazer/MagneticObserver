@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <by.org.cgm.magneticobserver.ui.dialogs.RangeBarPreference
         android:key="prefs"
-        android:title="title"
-        android:summary="summary"
-        android:defaultValue="9"/>
+        android:title="@string/preference_rangebar_title"
+        android:summary="@string/preference_rangebar_summary"
+        android:defaultValue="@string/preference_rangebar_default_value"/>
 </PreferenceScreen>

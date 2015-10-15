@@ -13,6 +13,8 @@ public class AppCache {
 
     @Setter @Getter
     private String[] levels;
+    @Setter @Getter
+    private String[] shortLevels;
 
     private AppCache() {}
 

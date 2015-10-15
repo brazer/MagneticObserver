@@ -14,6 +14,7 @@ public class MagneticObserverApplication extends Application {
 
         AppCache.initialize();
         AppCache.getInstance().setLevels(getResources().getStringArray(R.array.storm_level));
+        AppCache.getInstance().setShortLevels(getResources().getStringArray(R.array.storm_short_level));
     }
 
 }

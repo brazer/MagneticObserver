@@ -10,4 +10,9 @@
     <string name="begin">Начало</string>
     <string name="end">Конец</string>
     <string name="today">Сегодня</string>
+    <string name="settings">Настройки</string>
+    <string name="preference_rangebar_title">Настройки параметров уведомления</string>
+    <string name="preference_rangebar_summary">Выберите диапазон геомагнитных состояний, о которых хотите получать уведомление</string>
+    <string name="turn_off_notification">Отключить уведомления</string>
+    <string name="preference_notification_specs">Обозначения: С - спокойно, МБ - маленькая буря, УБ - умеренная буря, ББ - большая буря, ОББ - очень большая буря</string>
 </resources>
