@@ -142,7 +142,7 @@ public class RangeBarPreference extends DialogPreference implements
         init();
     }
 
-    class SettingsValue {
+    public static class SettingsValue {
 
         private static final String SEPARATOR = "-";
         @Getter @Setter
