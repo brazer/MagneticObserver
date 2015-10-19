@@ -55,7 +55,7 @@ public class CustomGcmListenerService extends GcmListenerService {
     }
     // [END receive_message]
 
-    private void processMessage() { //// TODO: 16.10.2015 test
+    private void processMessage() {
         String strVal = AppPreferences.getInstance().getString(PreferencesKeys.NOTIFICATIONS);
         RangeBarPreference.SettingsValue value = new RangeBarPreference.SettingsValue();
         value.setValue(strVal);

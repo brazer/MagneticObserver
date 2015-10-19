@@ -49,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        /*if (checkPlayServices()) {
+        if (checkPlayServices()) {
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
-        }*/
+        }
 
         showMessageFragment();
     }
