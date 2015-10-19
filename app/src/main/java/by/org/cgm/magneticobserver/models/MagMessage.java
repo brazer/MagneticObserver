@@ -23,7 +23,7 @@ public class MagMessage implements Serializable {
     @Getter private String begin;
     @Getter private String end;
     @Getter private String date;
-    private int value;
+    @Getter private int value;
 
     @SneakyThrows(ParseException.class)
     public void convertToLocalTime() {

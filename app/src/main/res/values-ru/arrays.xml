@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="storm_level">
+        <item>тихо</item>
+        <item>маленькая буря</item>
+        <item>умеренная буря</item>
+        <item>большая буря</item>
+        <item>очень большая буря</item>
+    </string-array>
+    <string-array name="storm_short_level">
+        <item>C</item>
+        <item>МБ</item>
+        <item>УБ</item>
+        <item>ББ</item>
+        <item>ОББ</item>
+    </string-array>
+</resources>

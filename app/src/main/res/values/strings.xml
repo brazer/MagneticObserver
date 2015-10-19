@@ -14,17 +14,17 @@
     <string name="end">End</string>
     <string name="loading">Loading…</string>
 
-    <string-array name="storm_level">
-        <item>quiet</item>
-        <item>small storm</item>
-        <item>moderate storm</item>
-        <item>big storm</item>
-        <item>very big storm</item>
-    </string-array>
     <string name="line_chart_x">H (av. %1$s)</string>
     <string name="line_chart_y">D (av. %1$s)</string>
     <string name="line_chart_z">Z (av. %1$s)</string>
     <string name="line_chart_desc">Current geomagnetic data</string>
     <string name="bar_chart_desc">К-index</string>
+
+    <string name="settings">Settings</string>
+    <string name="preference_rangebar_title">Notification</string>
+    <string name="preference_rangebar_summary">Choose range of geomagnetic levels to get notification about them</string>
+    <string name="preference_rangebar_default_value" translatable="false">0-4</string>
+    <string name="turn_off_notification">Turn off notifications</string>
+    <string name="preference_notification_specs">Specifications: Q - quiet, SS - small storm, MS - moderate storm, BS - big storm, VBS - very big storm</string>
 
 </resources>

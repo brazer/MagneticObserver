@@ -48,6 +48,7 @@ dependencies {
     )
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.4'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'com.appyvet:materialrangebar:1.1'
 }
 
 buildscript {

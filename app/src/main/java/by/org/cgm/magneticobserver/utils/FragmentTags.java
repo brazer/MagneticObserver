@@ -1,5 +1,6 @@
 package by.org.cgm.magneticobserver.utils;
 
+
 import by.org.cgm.magneticobserver.ui.fragments.ChartsFragment;
 import by.org.cgm.magneticobserver.ui.fragments.MessageFragment;
 

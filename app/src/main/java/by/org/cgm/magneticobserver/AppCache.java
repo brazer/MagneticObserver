@@ -20,6 +20,8 @@ public class AppCache {
     private ArrayList<Data> data;
     @Setter
     private ArrayList<Data> middle;
+    @Setter @Getter
+    private String[] shortLevels;
 
     private AppCache() {}
 

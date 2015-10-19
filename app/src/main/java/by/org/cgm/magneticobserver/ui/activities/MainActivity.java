@@ -50,14 +50,13 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        //// TODO: 01.10.2015 uncomment
-        /*if (checkPlayServices()) {
+        if (checkPlayServices()) {
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
-        }*/
+        }
 
-        showCharts();
-        //todo: showMessageFragment();
+        //todo showCharts();
+        showMessageFragment();
     }
 
     @Override
@@ -128,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
         }
 

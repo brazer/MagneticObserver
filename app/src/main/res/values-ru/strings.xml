@@ -4,23 +4,25 @@
     <string name="action_settings">Настройки</string>
     <string name="message">Магнитный уровень - %1$s</string>
     <string name="message_no_event">Нет событий…</string>
-    <string-array name="storm_level">
-        <item>спокойно</item>
-        <item>небольшая буря</item>
-        <item>умеренная буря</item>
-        <item>большая буря</item>
-        <item>очень большая буря</item>
-    </string-array>
+
     <string name="title_notification">Новое магнитное событие</string>
     <string name="no_token_retrieved_message">Получена ошибка при регистрации сервиса. Попробуйте запустить приложение позже.</string>
     <string name="title_activity_main">Магнитный обозреватель</string>
     <string name="begin">Начало</string>
     <string name="end">Конец</string>
     <string name="today">Сегодня</string>
+
     <string name="loading">Загрузка…</string>
     <string name="line_chart_x">H (ср. %1$s)</string>
     <string name="line_chart_y">D (ср. %1$s)</string>
     <string name="line_chart_z">D (ср. %1$s)</string>
     <string name="bar_chart_desc">K-индекс</string>
     <string name="line_chart_desc">Текущие геомагнитные данные</string>
+
+    <string name="settings">Настройки</string>
+    <string name="preference_rangebar_title">Настройки параметров уведомления</string>
+    <string name="preference_rangebar_summary">Выберите диапазон геомагнитных состояний, о которых хотите получать уведомление</string>
+    <string name="turn_off_notification">Отключить уведомления</string>
+    <string name="preference_notification_specs">Обозначения: С - спокойно, МБ - маленькая буря, УБ - умеренная буря, ББ - большая буря, ОББ - очень большая буря</string>
+
 </resources>
