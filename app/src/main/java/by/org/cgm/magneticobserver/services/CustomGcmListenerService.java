@@ -59,7 +59,8 @@ public class CustomGcmListenerService extends GcmListenerService {
         String strVal = AppPreferences.getInstance().getString(PreferencesKeys.NOTIFICATIONS);
         RangeBarPreference.SettingsValue value = new RangeBarPreference.SettingsValue();
         value.setValue(strVal);
-        if (value.getLeft() <= mMagMessage.getValue() && value.getRight() >= mMagMessage.getValue()) {
+        int normalizedVal = mMagMessage.getValue()/2;
+        if (value.getLeft() <= normalizedVal && value.getRight() >= normalizedVal) {
             /**
              * In some cases it may be useful to show a notification indicating to the user
              * that a message was received.
