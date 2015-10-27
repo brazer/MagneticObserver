@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
 import by.org.cgm.magneticobserver.AppCache;
-import by.org.cgm.magneticobserver.R;
+import by.org.cgm.magneticobserver.utils.ColorUtils;
 import lombok.Getter;
 import lombok.SneakyThrows;
 
@@ -23,7 +23,7 @@ public class MagMessage implements Serializable {
     @Getter private String begin;
     @Getter private String end;
     @Getter private String date;
-    private int value;
+    @Getter private int value;
 
     @SneakyThrows(ParseException.class)
     public void convertToLocalTime() {
@@ -60,19 +60,7 @@ public class MagMessage implements Serializable {
     }
 
     public int getColorId() {
-        switch (value) {
-            case 0: return R.color.color_quiet;
-            case 1: return R.color.color_quiet;
-            case 2: return R.color.color_low_storm;
-            case 3: return R.color.color_low_storm;
-            case 4: return R.color.color_moderate_storm;
-            case 5: return R.color.color_moderate_storm;
-            case 6: return R.color.color_high_storm;
-            case 7: return R.color.color_high_storm;
-            case 8: return R.color.color_very_high_storm;
-            case 9: return R.color.color_very_high_storm;
-        }
-        return R.color.white;
+        return ColorUtils.getColorId(value);
     }
 
 }

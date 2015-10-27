@@ -10,8 +10,19 @@ import by.org.cgm.magneticobserver.models.MagMessage;
  */
 public class StringUtils {
 
+    public static final String EMPTY = "";
+    private static final Gson GSON = new Gson();
+
     public static MagMessage parse(String json) {
-        return new Gson().fromJson(json, MagMessage.class);
+        return GSON.fromJson(json, MagMessage.class);
+    }
+
+    public static String toDoubleDigits(int val) {
+        return (val<10) ? "0" + val : String.valueOf(val);
+    }
+
+    public static String formatDecimals(String template, float value) {
+        return String.format(template, (double) Math.round(value * 10) / 10);
     }
 
 }

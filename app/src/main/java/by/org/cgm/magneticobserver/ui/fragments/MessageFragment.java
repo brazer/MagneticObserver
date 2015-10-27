@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui;
+package by.org.cgm.magneticobserver.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,21 +8,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import by.org.cgm.magneticobserver.R;
 import by.org.cgm.magneticobserver.models.MagMessage;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentMessage extends Fragment {
+public class MessageFragment extends BaseFragment {
 
     @Bind(R.id.fragment_message__level) TextView mLevelTv;
     @Bind(R.id.fragment_message__date) TextView mDateTv;
     @Bind(R.id.fragment_message__begin) TextView mBeginTv;
     @Bind(R.id.fragment_message__end) TextView mEndTv;
 
-    public FragmentMessage() {
+    public MessageFragment() {
         // Required empty public constructor
     }
 
@@ -36,7 +35,6 @@ public class FragmentMessage extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
         Bundle args = getArguments();
         if (args != null) {
             MagMessage magMessage = (MagMessage) args.getSerializable(MagMessage.TAG);
@@ -50,9 +48,4 @@ public class FragmentMessage extends Fragment {
         }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
 }

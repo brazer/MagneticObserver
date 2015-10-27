@@ -1,5 +1,8 @@
 package by.org.cgm.magneticobserver;
 
+import java.util.ArrayList;
+
+import by.org.cgm.magneticobserver.models.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +16,12 @@ public class AppCache {
 
     @Setter @Getter
     private String[] levels;
+    @Setter
+    private ArrayList<Data> data;
+    @Setter
+    private ArrayList<Data> middle;
+    @Setter @Getter
+    private String[] shortLevels;
 
     private AppCache() {}
 
@@ -21,8 +30,14 @@ public class AppCache {
     }
 
     public static AppCache getInstance() {
-        if (sInstance == null) initialize();
         return sInstance;
     }
 
+    public ArrayList<Data> getMiddle() {
+        return middle;
+    }
+
+    public ArrayList<Data> getData() {
+        return data;
+    }
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <by.org.cgm.magneticobserver.ui.dialogs.RangeBarPreference
+        android:key="prefs"
+        android:title="@string/preference_rangebar_title"
+        android:summary="@string/preference_rangebar_summary"
+        android:defaultValue="@string/preference_rangebar_default_value"/>
+</PreferenceScreen>

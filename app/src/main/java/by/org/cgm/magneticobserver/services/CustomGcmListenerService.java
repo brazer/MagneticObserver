@@ -14,7 +14,10 @@ import com.google.android.gms.gcm.GcmListenerService;
 
 import by.org.cgm.magneticobserver.R;
 import by.org.cgm.magneticobserver.models.MagMessage;
-import by.org.cgm.magneticobserver.ui.MainActivity;
+import by.org.cgm.magneticobserver.preferences.AppPreferences;
+import by.org.cgm.magneticobserver.preferences.PreferencesKeys;
+import by.org.cgm.magneticobserver.ui.activities.MainActivity;
+import by.org.cgm.magneticobserver.ui.dialogs.RangeBarPreference;
 import by.org.cgm.magneticobserver.utils.StringUtils;
 
 /**
@@ -48,13 +51,23 @@ public class CustomGcmListenerService extends GcmListenerService {
          */
         mMagMessage = StringUtils.parse(message);
         mMagMessage.convertToLocalTime();
-        /**
-         * In some cases it may be useful to show a notification indicating to the user
-         * that a message was received.
-         */
-        sendNotification(mMagMessage.toMessage(getString(R.string.message)));
+        processMessage();
     }
     // [END receive_message]
+
+    private void processMessage() {
+        String strVal = AppPreferences.getInstance().getString(PreferencesKeys.NOTIFICATIONS);
+        RangeBarPreference.SettingsValue value = new RangeBarPreference.SettingsValue();
+        value.setValue(strVal);
+        int normalizedVal = mMagMessage.getValue()/2;
+        if (value.getLeft() <= normalizedVal && value.getRight() >= normalizedVal) {
+            /**
+             * In some cases it may be useful to show a notification indicating to the user
+             * that a message was received.
+             */
+            sendNotification(mMagMessage.toMessage(getString(R.string.message)));
+        }
+    }
 
     /**
      * Create and show a simple notification containing the received GCM message.
