@@ -28,7 +28,7 @@ import by.org.cgm.magneticobserver.ui.fragment.MessageFragment;
 import by.org.cgm.magneticobserver.util.FragmentTags;
 import by.org.cgm.magneticobserver.util.FragmentUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MessageFragment.OnShowChartsListener {
 
     private final String TAG = MainActivity.class.getSimpleName();
     private BroadcastReceiver mRegistrationBroadcastReceiver;
@@ -130,5 +130,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onShowChartsFragment() {
+        showChartsFragment();
     }
 }

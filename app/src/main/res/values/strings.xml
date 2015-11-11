@@ -26,5 +26,6 @@
     <string name="preference_rangebar_default_value" translatable="false">0-4</string>
     <string name="turn_off_notification">Turn off notifications</string>
     <string name="preference_notification_specs">Specifications: Q - quiet, SS - small storm, MS - moderate storm, BS - big storm, VBS - very big storm</string>
+    <string name="show_charts">Show charts</string>
 
 </resources>
