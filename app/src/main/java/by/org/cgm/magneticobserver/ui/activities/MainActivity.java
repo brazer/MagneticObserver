@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import org.jetbrains.annotations.NotNull;
+
 import by.org.cgm.magneticobserver.R;
 import by.org.cgm.magneticobserver.models.MagMessage;
 import by.org.cgm.magneticobserver.services.RegistrationIntentService;
@@ -55,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         }
 
-        //todo showCharts();
-        showMessageFragment();
+        MagMessage magMessage = (MagMessage) getIntent().getSerializableExtra(MagMessage.TAG);
+        if (magMessage != null) showMessageFragment(magMessage);
+        else showChartsFragment();
     }
 
     @Override
@@ -92,22 +95,16 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void showCharts() {
+    private void showChartsFragment() {
         Fragment fragment = new ChartsFragment();
         FragmentUtils.replaceContent(this, R.id.container, fragment, FragmentTags.CHARTS);
     }
 
-    private void showMessageFragment() {
+    private void showMessageFragment(@NotNull MagMessage message) {
         Fragment fragment = new MessageFragment();
-        Intent intent = getIntent();
-        if (intent != null) {
-            MagMessage magMessage = (MagMessage) intent.getSerializableExtra(MagMessage.TAG);
-            if (magMessage != null) {
-                Bundle args = new Bundle();
-                args.putSerializable(MagMessage.TAG, magMessage);
-                fragment.setArguments(args);
-            }
-        }
+        Bundle args = new Bundle();
+        args.putSerializable(MagMessage.TAG, message);
+        fragment.setArguments(args);
         FragmentUtils.replaceContent(this, R.id.container, fragment, FragmentTags.MESSAGE);
     }
 
