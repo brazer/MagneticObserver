@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.models;
+package by.org.cgm.magneticobserver.model;
 
 import java.io.Serializable;
 import java.sql.Time;
@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
 import by.org.cgm.magneticobserver.AppCache;
-import by.org.cgm.magneticobserver.utils.ColorUtils;
+import by.org.cgm.magneticobserver.util.ColorUtils;
 import lombok.Getter;
 import lombok.SneakyThrows;
 

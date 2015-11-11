@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.services;
+package by.org.cgm.magneticobserver.service;
 
 import android.app.IntentService;
 import android.content.Intent;

@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import by.org.cgm.magneticobserver.MagneticObserverApplication;
-import by.org.cgm.magneticobserver.utils.StringUtils;
+import by.org.cgm.magneticobserver.util.StringUtils;
 
 /**
  * Author: Anatol Salanevich

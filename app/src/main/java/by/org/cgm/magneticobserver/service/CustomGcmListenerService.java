@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.services;
+package by.org.cgm.magneticobserver.service;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,12 +13,12 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 
 import by.org.cgm.magneticobserver.R;
-import by.org.cgm.magneticobserver.models.MagMessage;
+import by.org.cgm.magneticobserver.model.MagMessage;
 import by.org.cgm.magneticobserver.preferences.AppPreferences;
 import by.org.cgm.magneticobserver.preferences.PreferencesKeys;
-import by.org.cgm.magneticobserver.ui.activities.MainActivity;
-import by.org.cgm.magneticobserver.ui.dialogs.RangeBarPreference;
-import by.org.cgm.magneticobserver.utils.StringUtils;
+import by.org.cgm.magneticobserver.ui.activity.MainActivity;
+import by.org.cgm.magneticobserver.ui.dialog.RangeBarPreference;
+import by.org.cgm.magneticobserver.util.StringUtils;
 
 /**
  * Author: Anatol Salanevich

@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui.activities;
+package by.org.cgm.magneticobserver.ui.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -21,12 +21,12 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import org.jetbrains.annotations.NotNull;
 
 import by.org.cgm.magneticobserver.R;
-import by.org.cgm.magneticobserver.models.MagMessage;
-import by.org.cgm.magneticobserver.services.RegistrationIntentService;
-import by.org.cgm.magneticobserver.ui.fragments.ChartsFragment;
-import by.org.cgm.magneticobserver.ui.fragments.MessageFragment;
-import by.org.cgm.magneticobserver.utils.FragmentTags;
-import by.org.cgm.magneticobserver.utils.FragmentUtils;
+import by.org.cgm.magneticobserver.model.MagMessage;
+import by.org.cgm.magneticobserver.service.RegistrationIntentService;
+import by.org.cgm.magneticobserver.ui.fragment.ChartsFragment;
+import by.org.cgm.magneticobserver.ui.fragment.MessageFragment;
+import by.org.cgm.magneticobserver.util.FragmentTags;
+import by.org.cgm.magneticobserver.util.FragmentUtils;
 
 public class MainActivity extends AppCompatActivity {
 

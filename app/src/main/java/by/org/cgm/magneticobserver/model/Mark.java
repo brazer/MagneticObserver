@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.models;
+package by.org.cgm.magneticobserver.model;
 
 import lombok.Getter;
 

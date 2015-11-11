@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui.fragments;
+package by.org.cgm.magneticobserver.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import by.org.cgm.magneticobserver.R;
-import by.org.cgm.magneticobserver.models.MagMessage;
+import by.org.cgm.magneticobserver.model.MagMessage;
 
 /**
  * A simple {@link Fragment} subclass.

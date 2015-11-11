@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui.fragments;
+package by.org.cgm.magneticobserver.ui.fragment;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
@@ -27,13 +27,13 @@ import butterknife.BindString;
 import by.org.cgm.magneticobserver.AppCache;
 import by.org.cgm.magneticobserver.DataProcessing;
 import by.org.cgm.magneticobserver.R;
-import by.org.cgm.magneticobserver.models.Data;
-import by.org.cgm.magneticobserver.models.Mark;
-import by.org.cgm.magneticobserver.models.response.GetDataResponse;
+import by.org.cgm.magneticobserver.model.Data;
+import by.org.cgm.magneticobserver.model.Mark;
+import by.org.cgm.magneticobserver.model.response.GetDataResponse;
 import by.org.cgm.magneticobserver.network.API;
-import by.org.cgm.magneticobserver.utils.ColorUtils;
-import by.org.cgm.magneticobserver.utils.DateTimeUtils;
-import by.org.cgm.magneticobserver.utils.StringUtils;
+import by.org.cgm.magneticobserver.util.ColorUtils;
+import by.org.cgm.magneticobserver.util.DateTimeUtils;
+import by.org.cgm.magneticobserver.util.StringUtils;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;

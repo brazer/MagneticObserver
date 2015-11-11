@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui.dialogs;
+package by.org.cgm.magneticobserver.ui.dialog;
 
 import android.content.Context;
 import android.content.res.TypedArray;

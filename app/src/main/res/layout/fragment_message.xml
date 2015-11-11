@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="by.org.cgm.magneticobserver.ui.fragments.FragmentMessage"
+    tools:context="by.org.cgm.magneticobserver.ui.fragment.FragmentMessage"
     android:orientation="vertical">
 
     <TextView
