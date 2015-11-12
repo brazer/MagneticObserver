@@ -34,6 +34,10 @@ public class AppPreferences {
         return mPreferences.getString(key, StringUtils.EMPTY);
     }
 
+    public String getString(final String key, final String defVal) {
+        return mPreferences.getString(key, defVal);
+    }
+
     public void putString(final String key, final String value) {
         mEditor.putString(key, value);
         mEditor.commit();

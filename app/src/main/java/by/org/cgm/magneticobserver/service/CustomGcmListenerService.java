@@ -56,7 +56,8 @@ public class CustomGcmListenerService extends GcmListenerService {
     // [END receive_message]
 
     private void processMessage() {
-        String strVal = AppPreferences.getInstance().getString(PreferencesKeys.NOTIFICATIONS);
+        String strVal = AppPreferences.getInstance()
+                .getString(PreferencesKeys.NOTIFICATIONS, RangeBarPreference.DEFAULT_VALUE);
         RangeBarPreference.SettingsValue value = new RangeBarPreference.SettingsValue();
         value.setValue(strVal);
         int normalizedVal = mMagMessage.getValue()/2;

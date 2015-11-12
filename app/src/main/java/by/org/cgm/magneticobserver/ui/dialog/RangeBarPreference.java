@@ -18,7 +18,6 @@ import by.org.cgm.magneticobserver.AppCache;
 import by.org.cgm.magneticobserver.R;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.SneakyThrows;
 
 /**
  * Author: Anatol Salanevich
@@ -27,8 +26,8 @@ import lombok.SneakyThrows;
 public class RangeBarPreference extends DialogPreference implements
         RangeBar.OnRangeBarChangeListener, CheckBox.OnCheckedChangeListener {
 
-    private final static String DEFAULT_VALUE = "0-4";
-    public static final String OFF = "off";
+    public final static String DEFAULT_VALUE = "0-4";
+    private static final String OFF = "off";
     private SettingsValue mValue = new SettingsValue();
     private boolean isInit;
     private CheckBox mEnabledNotificationCb;
@@ -151,7 +150,6 @@ public class RangeBarPreference extends DialogPreference implements
         @Getter @Setter
         private int left, right;
 
-        @SneakyThrows(Exception.class)
         public void setValue(@NotNull String value) {
             if (value.equals(OFF)) {
                 left = -1;
