@@ -1,15 +1,13 @@
 package by.org.cgm.magneticobserver.ui.fragment;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -27,6 +25,7 @@ public class MessageFragment extends BaseFragment {
     @Bind(R.id.fragment_message__begin) TextView mBeginTv;
     @Bind(R.id.fragment_message__end) TextView mEndTv;
     private OnShowChartsListener mListener;
+    private MagMessage mMessage;
 
     public interface OnShowChartsListener {
         void onShowChartsFragment();
@@ -37,26 +36,25 @@ public class MessageFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false);
+    protected int getLayoutRes() {
+        return R.layout.fragment_message;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        Bundle args = getArguments();
-        if (args != null) {
-            MagMessage magMessage = (MagMessage) args.getSerializable(MagMessage.TAG);
-            if (magMessage != null) {
-                mLevelTv.setText(magMessage.getStormLevel());
-                mLevelTv.setBackgroundColor(getResources().getColor(magMessage.getColorId()));
-                mDateTv.setText(magMessage.getDate());
-                mBeginTv.setText(magMessage.getBegin());
-                mEndTv.setText(magMessage.getEnd());
-            }
-        }
+    protected void readArgs(Bundle args) {
+        mMessage = (MagMessage) args.getSerializable(MagMessage.TAG);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    protected void initViews() {
+        mLevelTv.setText(mMessage.getStormLevel());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            mLevelTv.setBackgroundColor(getResources().getColor(mMessage.getColorId(), null));
+        } else mLevelTv.setBackgroundColor(getResources().getColor(mMessage.getColorId()));
+        mDateTv.setText(mMessage.getDate());
+        mBeginTv.setText(mMessage.getBegin());
+        mEndTv.setText(mMessage.getEnd());
     }
 
     @Override

@@ -4,9 +4,6 @@ import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -64,15 +61,15 @@ public class ChartsFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_charts, container, false);
+    protected int getLayoutRes() {
+        return R.layout.fragment_charts;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected void readArgs(Bundle args) { /*do nothing*/ }
+
+    @Override
+    protected void initViews() {
         mProgressDialog =
                 ProgressDialog.show(getActivity(), StringUtils.EMPTY, getString(R.string.loading));
         String day = DateTimeUtils.getYesterday();

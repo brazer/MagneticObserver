@@ -12,10 +12,13 @@ import android.widget.CompoundButton;
 
 import com.appyvet.rangebar.RangeBar;
 
+import org.jetbrains.annotations.NotNull;
+
 import by.org.cgm.magneticobserver.AppCache;
 import by.org.cgm.magneticobserver.R;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
 
 /**
  * Author: Anatol Salanevich
@@ -148,7 +151,8 @@ public class RangeBarPreference extends DialogPreference implements
         @Getter @Setter
         private int left, right;
 
-        public void setValue(String value) {
+        @SneakyThrows(Exception.class)
+        public void setValue(@NotNull String value) {
             if (value.equals(OFF)) {
                 left = -1;
                 right = -1;
