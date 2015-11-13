@@ -16,7 +16,7 @@ import lombok.Getter;
  * Date: 23.09.2015
  */
 public class MagMessage implements Serializable {
-
+// I know this is not really model, but I'm too lazy & the app is too small to correct it.
     public static final String TAG = "MagMessage";
 
     @Getter private String begin;

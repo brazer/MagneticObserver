@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,17 +27,25 @@ import by.org.cgm.magneticobserver.ui.fragment.MessageFragment;
 import by.org.cgm.magneticobserver.util.FragmentTags;
 import by.org.cgm.magneticobserver.util.FragmentUtils;
 
-public class MainActivity extends AppCompatActivity implements MessageFragment.OnShowChartsListener {
+public class MainActivity extends BaseActivity implements MessageFragment.OnShowChartsListener {
 
     private final String TAG = MainActivity.class.getSimpleName();
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private MagMessage mMessage;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getLayoutRes() {
+        return R.layout.activity_main;
+    }
 
+    @Override
+    protected void readArgs(Intent args) {
+        mMessage = (MagMessage) args.getSerializableExtra(MagMessage.TAG);
+    }
+
+    @Override
+    protected void initViews() {
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -57,8 +64,7 @@ public class MainActivity extends AppCompatActivity implements MessageFragment.O
             startService(intent);
         }
 
-        MagMessage magMessage = (MagMessage) getIntent().getSerializableExtra(MagMessage.TAG);
-        if (magMessage != null) showMessageFragment(magMessage);
+        if (mMessage != null) showMessageFragment(mMessage);
         else showChartsFragment();
     }
 
