@@ -1,19 +1,13 @@
 package by.org.cgm.magneticobserver.ui.fragment;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
@@ -22,13 +16,14 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.BindString;
 import by.org.cgm.magneticobserver.AppCache;
-import by.org.cgm.magneticobserver.DataProcessing;
 import by.org.cgm.magneticobserver.R;
+import by.org.cgm.magneticobserver.data.BarDataHelper;
+import by.org.cgm.magneticobserver.data.DataProcessing;
+import by.org.cgm.magneticobserver.data.LineDataHelper;
 import by.org.cgm.magneticobserver.model.Data;
 import by.org.cgm.magneticobserver.model.Mark;
 import by.org.cgm.magneticobserver.model.response.GetDataResponse;
 import by.org.cgm.magneticobserver.network.API;
-import by.org.cgm.magneticobserver.util.ColorUtils;
 import by.org.cgm.magneticobserver.util.DateTimeUtils;
 import by.org.cgm.magneticobserver.util.StringUtils;
 import retrofit.Callback;
@@ -77,85 +72,16 @@ public class ChartsFragment extends BaseFragment {
     }
 
     private void setDataForLineChart() {
-        ArrayList<String> xVals = new ArrayList<>();
-        ArrayList<Entry> y1Vals = new ArrayList<>();
-        ArrayList<Entry> y2Vals = new ArrayList<>();
-        ArrayList<Entry> y3Vals = new ArrayList<>();
-        ArrayList<Double> x = new ArrayList<>();
-        ArrayList<Double> y = new ArrayList<>();
-        ArrayList<Double> z = new ArrayList<>();
-        for (Data d : data) {
-            x.add(d.getX());
-            y.add(d.getY());
-            z.add(d.getZ());
-        }
-        float avrX = getAverage(x);
-        float avrY = getAverage(y);
-        float avrZ = getAverage(z);
-        for (int i = 0; i < data.size(); i++) {
-            xVals.add(
-                    data.get(i).getDate() + " " +
-                            StringUtils.toDoubleDigits(data.get(i).getHour()) + ":" +
-                            StringUtils.toDoubleDigits(data.get(i).getMinute()));
-            float val = (float) data.get(i).getX() - avrX;
-            y1Vals.add(new Entry(val, i));
-            val = (float) data.get(i).getY() - avrY;
-            y2Vals.add(new Entry(val, i));
-            val = (float) data.get(i).getZ() - avrZ;
-            y3Vals.add(new Entry(val, i));
-        }
-        ArrayList<LineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(getDataSet(y1Vals, StringUtils.formatDecimals(mX, avrX), Color.RED));
-        dataSets.add(getDataSet(y2Vals, StringUtils.formatDecimals(mY, avrY), Color.BLUE));
-        dataSets.add(getDataSet(y3Vals, StringUtils.formatDecimals(mZ, avrZ), Color.GREEN));
-        LineData d = new LineData(xVals, dataSets);
-        mChartLc1.setData(d);
+        LineDataHelper helper = new LineDataHelper(data, mX, mY, mZ);
+        mChartLc1.setData(helper.getLineData());
         if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
         mChartLc1.setHighlightEnabled(false);
         mChartLc1.animateX(2500);
     }
 
-    private LineDataSet getDataSet(ArrayList<Entry> yVals, String name, int color) {
-        LineDataSet set = new LineDataSet(yVals, name);
-        set.disableDashedLine();
-        set.setColor(color);
-        set.setLineWidth(1f);
-        set.setDrawCircles(false);
-        set.setDrawCircleHole(false);
-        set.setDrawValues(false);
-        set.setFillAlpha(65);
-        set.setFillColor(Color.BLACK);
-        return set;
-    }
-
-    private float getAverage(ArrayList<Double> vals) {
-        if (vals.size()==0) return 0;
-        float sum = 0;
-        for (double v : vals) sum += v;
-        return sum/vals.size();
-    }
-
     private void setDataForBarChart() {
-        ArrayList<String> xVals = new ArrayList<>();
-        ArrayList<BarEntry> yVals = new ArrayList<>();
-        int colors[] = new int[marks.size()];
-        for (int i = 0; i < marks.size(); i++) {
-            String xVal = DateTimeUtils.getDate(marks.get(i).begin) + " (" +
-                    DateTimeUtils.getTime(marks.get(i).begin) + "-" +
-                    DateTimeUtils.getTime(marks.get(i).end) + ")";
-            xVals.add(xVal);
-            float yVal = marks.get(i).level;
-            yVals.add(new BarEntry(yVal, i));
-            colors[i] = ColorUtils.getColorRgb(marks.get(i).level);
-        }
-        BarDataSet set = new BarDataSet(yVals, "Ki");
-        set.setColors(colors);
-        set.setValueFormatter(integerFormatter);
-        ArrayList<BarDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set);
-        BarData data = new BarData(xVals, dataSets);
-        data.setValueTextSize(10f);
-        mChartBc2.setData(data);
+        BarDataHelper helper = new BarDataHelper(marks, integerFormatter);
+        mChartBc2.setData(helper.getBarData());
         if (isAdded()) mChartBc2.setDescription(getString(R.string.bar_chart_desc));
         mChartBc2.setHighlightEnabled(false);
         mChartBc2.animateXY(2500, 2500);
