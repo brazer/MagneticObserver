@@ -3,6 +3,7 @@ package by.org.cgm.magneticobserver.ui.fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -33,7 +34,7 @@ import retrofit.client.Response;
 /**
  * A simple {@link BaseFragment} subclass.
  */
-public class ChartsFragment extends BaseFragment {
+public class ChartsFragment extends BaseFragment implements View.OnLongClickListener {
 
     @Bind(R.id.fragment_charts__chart1) LineChart mChartLc1;
     @Bind(R.id.fragment_charts__chart2) BarChart mChartBc2;
@@ -85,6 +86,20 @@ public class ChartsFragment extends BaseFragment {
         if (isAdded()) mChartBc2.setDescription(getString(R.string.bar_chart_desc));
         mChartBc2.setHighlightEnabled(false);
         mChartBc2.animateXY(2500, 2500);
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if (v.getId() == R.id.fragment_charts__chart1) {
+            //// TODO: 13.11.2015  
+            /*LineDataHelper helper = new LineDataHelper(data, mX);
+            mChartLc1.setData(helper.getLineData());
+            if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
+            mChartLc1.setHighlightEnabled(false);
+            mChartLc1.animateX(2500);*/
+            return true;
+        }
+        return false;
     }
 
     class GetDataCallback implements Callback<GetDataResponse> {
