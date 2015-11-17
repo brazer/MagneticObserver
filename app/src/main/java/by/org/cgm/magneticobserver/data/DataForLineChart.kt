@@ -44,7 +44,7 @@ fun getAverage(array: DoubleArray) : Double {
     return sum/array.size()
 }
 
-class LineDataHelper(val data: ArrayList<Data>, val mX: String) {
+class LineDataHelper {
 
     private val xVals = ArrayList<String>()
     private val y1Vals = ArrayList<Entry>()
@@ -52,8 +52,8 @@ class LineDataHelper(val data: ArrayList<Data>, val mX: String) {
     private val y3Vals = ArrayList<Entry>()
     private val dataSets = ArrayList<LineDataSet>()
 
-    init { //todo
-        /*val rmsVals = getRMSVals()
+    constructor(data: ArrayList<Data>, mX: String) {
+        val rmsVals = getRMSVals(data)
         val avr = getAverage(rmsVals)
         for (i in data.indices) {
             xVals.add(
@@ -63,10 +63,10 @@ class LineDataHelper(val data: ArrayList<Data>, val mX: String) {
             )
             y1Vals.add(Entry((rmsVals[i] - avr).toFloat(), i))
         }
-        dataSets.add(getDataSet(y1Vals, StringUtils.formatDecimals(mX, avr.toFloat()), Color.RED))*/
+        dataSets.add(getDataSet(y1Vals, StringUtils.formatDecimals(mX, avr.toFloat()), Color.RED))
     }
 
-    private fun getRMSVals() : DoubleArray {
+    private fun getRMSVals(data: ArrayList<Data>) : DoubleArray {
         val rmsVals = DoubleArray(data.size())
         for (i in data.indices) {
             rmsVals[i] = (Math.sqrt(data[i].x*data[i].x + data[i].y*data[i].y + data[i].z*data[i].z))
@@ -74,7 +74,7 @@ class LineDataHelper(val data: ArrayList<Data>, val mX: String) {
         return rmsVals
     }
 
-    constructor(data: ArrayList<Data>, mX: String, mY: String, mZ: String) : this(data, mX) {
+    constructor(data: ArrayList<Data>, mX: String, mY: String, mZ: String) {
         val avr = AverageXYZ(data)
         val avrX = avr.avrX
         val avrY = avr.avrY

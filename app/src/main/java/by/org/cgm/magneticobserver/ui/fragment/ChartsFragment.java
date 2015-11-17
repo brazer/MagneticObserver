@@ -44,6 +44,8 @@ public class ChartsFragment extends BaseFragment implements View.OnLongClickList
     @BindString(R.string.line_chart_x) String mX;
     @BindString(R.string.line_chart_y) String mY;
     @BindString(R.string.line_chart_z) String mZ;
+    private LineDataHelper mHelper1, mHelper2;
+    private boolean switcher;
 
     private ValueFormatter integerFormatter = new ValueFormatter() {
         @Override
@@ -66,6 +68,8 @@ public class ChartsFragment extends BaseFragment implements View.OnLongClickList
 
     @Override
     protected void initViews() {
+        mChartLc1.setOnLongClickListener(this);
+        switcher = true;
         mProgressDialog =
                 ProgressDialog.show(getActivity(), StringUtils.EMPTY, getString(R.string.loading));
         String day = DateTimeUtils.getYesterday();
@@ -73,8 +77,9 @@ public class ChartsFragment extends BaseFragment implements View.OnLongClickList
     }
 
     private void setDataForLineChart() {
-        LineDataHelper helper = new LineDataHelper(data, mX, mY, mZ);
-        mChartLc1.setData(helper.getLineData());
+        mHelper1 = new LineDataHelper(data, mX);
+        mHelper2 = new LineDataHelper(data, mX, mY, mZ);
+        mChartLc1.setData(mHelper1.getLineData());
         if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
         mChartLc1.setHighlightEnabled(false);
         mChartLc1.animateX(2500);
@@ -91,15 +96,20 @@ public class ChartsFragment extends BaseFragment implements View.OnLongClickList
     @Override
     public boolean onLongClick(View v) {
         if (v.getId() == R.id.fragment_charts__chart1) {
-            //// TODO: 13.11.2015  
-            /*LineDataHelper helper = new LineDataHelper(data, mX);
-            mChartLc1.setData(helper.getLineData());
-            if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
-            mChartLc1.setHighlightEnabled(false);
-            mChartLc1.animateX(2500);*/
+            switcher = !switcher;
+            showLineChart();
             return true;
         }
         return false;
+    }
+
+    private void showLineChart() {
+        if (switcher) {
+            mChartLc1.setData(mHelper1.getLineData());
+        } else {
+            mChartLc1.setData(mHelper2.getLineData());
+        }
+        mChartLc1.animateX(2500);
     }
 
     class GetDataCallback implements Callback<GetDataResponse> {
