@@ -15,7 +15,7 @@
     <string name="loading">Загрузка…</string>
     <string name="line_chart_x">H (ср. %1$s)</string>
     <string name="line_chart_y">D (ср. %1$s)</string>
-    <string name="line_chart_z">D (ср. %1$s)</string>
+    <string name="line_chart_z">Z (ср. %1$s)</string>
     <string name="bar_chart_desc">K-индекс</string>
     <string name="line_chart_desc">Текущие геомагнитные данные</string>
 

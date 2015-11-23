@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.utils;
+package by.org.cgm.magneticobserver.util;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;

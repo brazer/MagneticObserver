@@ -1,23 +1,22 @@
-package by.org.cgm.magneticobserver.models;
+package by.org.cgm.magneticobserver.model;
+
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.TimeZone;
 
 import by.org.cgm.magneticobserver.AppCache;
-import by.org.cgm.magneticobserver.utils.ColorUtils;
+import by.org.cgm.magneticobserver.util.ColorUtils;
 import lombok.Getter;
-import lombok.SneakyThrows;
 
 /**
  * Author: Anatol Salanevich
  * Date: 23.09.2015
  */
 public class MagMessage implements Serializable {
-
+// I know this is not really model, but I'm too lazy & the app is too small to correct it.
     public static final String TAG = "MagMessage";
 
     @Getter private String begin;
@@ -25,17 +24,17 @@ public class MagMessage implements Serializable {
     @Getter private String date;
     @Getter private int value;
 
-    @SneakyThrows(ParseException.class)
     public void convertToLocalTime() {
-        DateFormat format = new SimpleDateFormat("HH:mm");
-        format.setTimeZone(TimeZone.getTimeZone("UTC"));
-        begin = convert(new Time(format.parse(begin).getTime()));
-        end = convert(new Time(format.parse(end).getTime()));
+        begin = convert(begin);
+        end = convert(end);
     }
 
-    private String convert(Time time) {
-        DateFormat mskFormat = new SimpleDateFormat("HH:mm");
-        return mskFormat.format(time);
+    private String convert(String time) {
+        DateTimeFormatter inputFormatter = DateTimeFormat.forPattern("HH:mm").withZoneUTC();
+        DateTime parsed = inputFormatter.parseDateTime(time);
+        DateTimeFormatter outputFormatter = DateTimeFormat.forPattern("HH:mm")
+                .withZone(DateTimeZone.forID("Europe/Minsk"));
+        return outputFormatter.print(parsed);
     }
 
     public String toMessage(String template) {

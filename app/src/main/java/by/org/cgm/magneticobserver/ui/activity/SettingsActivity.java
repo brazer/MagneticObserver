@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui.activities;
+package by.org.cgm.magneticobserver.ui.activity;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

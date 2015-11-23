@@ -1,8 +1,8 @@
-package by.org.cgm.magneticobserver.utils;
+package by.org.cgm.magneticobserver.util;
 
 
-import by.org.cgm.magneticobserver.ui.fragments.ChartsFragment;
-import by.org.cgm.magneticobserver.ui.fragments.MessageFragment;
+import by.org.cgm.magneticobserver.ui.fragment.ChartsFragment;
+import by.org.cgm.magneticobserver.ui.fragment.MessageFragment;
 
 /**
  * Author: Anatol Salanevich

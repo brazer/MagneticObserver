@@ -1,6 +1,6 @@
 package by.org.cgm.magneticobserver.network;
 
-import by.org.cgm.magneticobserver.models.response.GetDataResponse;
+import by.org.cgm.magneticobserver.model.response.GetDataResponse;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Query;

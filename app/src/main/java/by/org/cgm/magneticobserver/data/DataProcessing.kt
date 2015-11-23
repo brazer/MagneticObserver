@@ -1,8 +1,9 @@
-package by.org.cgm.magneticobserver
+package by.org.cgm.magneticobserver.data
 
-import by.org.cgm.magneticobserver.models.Data
-import by.org.cgm.magneticobserver.models.Mark
-import by.org.cgm.magneticobserver.utils.StringUtils
+import by.org.cgm.magneticobserver.AppCache
+import by.org.cgm.magneticobserver.model.Data
+import by.org.cgm.magneticobserver.model.Mark
+import by.org.cgm.magneticobserver.util.StringUtils
 import java.util.*
 
 /**

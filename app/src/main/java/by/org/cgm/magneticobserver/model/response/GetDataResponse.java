@@ -1,11 +1,11 @@
-package by.org.cgm.magneticobserver.models.response;
+package by.org.cgm.magneticobserver.model.response;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
 
-import by.org.cgm.magneticobserver.models.Data;
+import by.org.cgm.magneticobserver.model.Data;
 
 /**
  * Author: Anatol Salanevich

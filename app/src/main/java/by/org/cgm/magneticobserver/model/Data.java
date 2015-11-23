@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.models;
+package by.org.cgm.magneticobserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

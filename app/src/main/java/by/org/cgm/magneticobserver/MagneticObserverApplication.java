@@ -3,8 +3,9 @@ package by.org.cgm.magneticobserver;
 import android.app.Application;
 import android.content.Context;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import by.org.cgm.magneticobserver.network.API;
-import retrofit.http.HEAD;
 
 /**
  * Author: Anatol Salanevich
@@ -18,6 +19,7 @@ public class MagneticObserverApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        JodaTimeAndroid.init(this);
         API.initialize();
         sContext = this;
         AppCache.initialize();

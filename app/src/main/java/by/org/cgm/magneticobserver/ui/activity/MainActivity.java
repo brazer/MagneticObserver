@@ -1,4 +1,4 @@
-package by.org.cgm.magneticobserver.ui.activities;
+package by.org.cgm.magneticobserver.ui.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,25 +17,35 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
-import by.org.cgm.magneticobserver.R;
-import by.org.cgm.magneticobserver.models.MagMessage;
-import by.org.cgm.magneticobserver.services.RegistrationIntentService;
-import by.org.cgm.magneticobserver.ui.fragments.ChartsFragment;
-import by.org.cgm.magneticobserver.ui.fragments.MessageFragment;
-import by.org.cgm.magneticobserver.utils.FragmentTags;
-import by.org.cgm.magneticobserver.utils.FragmentUtils;
+import org.jetbrains.annotations.NotNull;
 
-public class MainActivity extends AppCompatActivity {
+import by.org.cgm.magneticobserver.R;
+import by.org.cgm.magneticobserver.model.MagMessage;
+import by.org.cgm.magneticobserver.service.RegistrationIntentService;
+import by.org.cgm.magneticobserver.ui.fragment.ChartsFragment;
+import by.org.cgm.magneticobserver.ui.fragment.MessageFragment;
+import by.org.cgm.magneticobserver.util.FragmentTags;
+import by.org.cgm.magneticobserver.util.FragmentUtils;
+
+public class MainActivity extends BaseActivity implements MessageFragment.OnShowChartsListener {
 
     private final String TAG = MainActivity.class.getSimpleName();
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private MagMessage mMessage;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getLayoutRes() {
+        return R.layout.activity_main;
+    }
 
+    @Override
+    protected void readArgs(Intent args) {
+        mMessage = (MagMessage) args.getSerializableExtra(MagMessage.TAG);
+    }
+
+    @Override
+    protected void initViews() {
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -55,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         }
 
-        //todo showCharts();
-        showMessageFragment();
+        if (mMessage != null) showMessageFragment(mMessage);
+        else showChartsFragment();
     }
 
     @Override
@@ -92,22 +101,16 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void showCharts() {
+    private void showChartsFragment() {
         Fragment fragment = new ChartsFragment();
         FragmentUtils.replaceContent(this, R.id.container, fragment, FragmentTags.CHARTS);
     }
 
-    private void showMessageFragment() {
+    private void showMessageFragment(@NotNull MagMessage message) {
         Fragment fragment = new MessageFragment();
-        Intent intent = getIntent();
-        if (intent != null) {
-            MagMessage magMessage = (MagMessage) intent.getSerializableExtra(MagMessage.TAG);
-            if (magMessage != null) {
-                Bundle args = new Bundle();
-                args.putSerializable(MagMessage.TAG, magMessage);
-                fragment.setArguments(args);
-            }
-        }
+        Bundle args = new Bundle();
+        args.putSerializable(MagMessage.TAG, message);
+        fragment.setArguments(args);
         FragmentUtils.replaceContent(this, R.id.container, fragment, FragmentTags.MESSAGE);
     }
 
@@ -133,5 +136,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onShowChartsFragment() {
+        showChartsFragment();
     }
 }

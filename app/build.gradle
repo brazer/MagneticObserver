@@ -10,16 +10,19 @@ android {
             storePassword KEYSTORE_PASSWORD
         }
     }
-    compileSdkVersion 22
+    compileSdkVersion 23
     buildToolsVersion "23.0.1"
     defaultConfig {
         applicationId "by.org.cgm.magneticobserver"
         minSdkVersion 15
-        targetSdkVersion 22
-        versionCode 2
-        versionName "1.1"
+        targetSdkVersion 23
+        versionCode 3
+        versionName "1.2"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -41,9 +44,8 @@ repositories {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.google.android.gms:play-services-gcm:7.5.0'
-    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.google.android.gms:play-services-gcm:8.3.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     provided 'org.projectlombok:lombok:1.16.6'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
@@ -56,6 +58,8 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.4'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'com.appyvet:materialrangebar:1.1'
+    compile 'com.android.support:support-annotations:23.1.0'
+    compile 'net.danlew:android.joda:2.9.0'
 }
 
 buildscript {

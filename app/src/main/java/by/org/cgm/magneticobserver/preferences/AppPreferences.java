@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import by.org.cgm.magneticobserver.MagneticObserverApplication;
-import by.org.cgm.magneticobserver.utils.StringUtils;
+import by.org.cgm.magneticobserver.util.StringUtils;
 
 /**
  * Author: Anatol Salanevich
@@ -32,6 +32,10 @@ public class AppPreferences {
 
     public String getString(final String key) {
         return mPreferences.getString(key, StringUtils.EMPTY);
+    }
+
+    public String getString(final String key, final String defVal) {
+        return mPreferences.getString(key, defVal);
     }
 
     public void putString(final String key, final String value) {

@@ -2,7 +2,7 @@ package by.org.cgm.magneticobserver;
 
 import java.util.ArrayList;
 
-import by.org.cgm.magneticobserver.models.Data;
+import by.org.cgm.magneticobserver.model.Data;
 import lombok.Getter;
 import lombok.Setter;
 

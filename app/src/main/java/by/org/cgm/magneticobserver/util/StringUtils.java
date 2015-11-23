@@ -1,8 +1,8 @@
-package by.org.cgm.magneticobserver.utils;
+package by.org.cgm.magneticobserver.util;
 
 import com.google.gson.Gson;
 
-import by.org.cgm.magneticobserver.models.MagMessage;
+import by.org.cgm.magneticobserver.model.MagMessage;
 
 /**
  * Author: Anatol Salanevich
