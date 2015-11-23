@@ -69,7 +69,7 @@ class LineDataHelper {
     private fun getRMSVals(data: ArrayList<Data>) : DoubleArray {
         val rmsVals = DoubleArray(data.size())
         for (i in data.indices) {
-            rmsVals[i] = (Math.sqrt(data[i].x*data[i].x + data[i].y*data[i].y + data[i].z*data[i].z))
+            rmsVals[i] = (Math.sqrt(data[i].x*data[i].x + data[i].z*data[i].z))
         }
         return rmsVals
     }

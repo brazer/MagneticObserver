@@ -22,7 +22,7 @@ class BarDataHelper(val marks: ArrayList<Mark>, val integerFormatter: ValueForma
     init {
         val colors = ArrayList<Int>()
         for (i in marks.indices) {
-            val xVal = DateTimeUtils.getDate(marks[i].begin) + "(" +
+            val xVal = DateTimeUtils.getDate(marks[i].begin) + " (" +
                     DateTimeUtils.getTime(marks[i].begin) + "-" +
                     DateTimeUtils.getTime(marks[i].end) + ")"
             xVals.add(xVal)

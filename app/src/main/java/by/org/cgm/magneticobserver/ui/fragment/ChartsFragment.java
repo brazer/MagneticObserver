@@ -95,6 +95,7 @@ public class ChartsFragment extends BaseFragment implements View.OnLongClickList
 
     @Override
     public boolean onLongClick(View v) {
+        //// TODO: 17.11.2015 delete this
         if (v.getId() == R.id.fragment_charts__chart1) {
             switcher = !switcher;
             showLineChart();
