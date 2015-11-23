@@ -3,7 +3,6 @@ package by.org.cgm.magneticobserver.ui.fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -34,7 +33,7 @@ import retrofit.client.Response;
 /**
  * A simple {@link BaseFragment} subclass.
  */
-public class ChartsFragment extends BaseFragment implements View.OnLongClickListener {
+public class ChartsFragment extends BaseFragment {
 
     @Bind(R.id.fragment_charts__chart1) LineChart mChartLc1;
     @Bind(R.id.fragment_charts__chart2) BarChart mChartBc2;
@@ -42,10 +41,6 @@ public class ChartsFragment extends BaseFragment implements View.OnLongClickList
     private ArrayList<Data> data = new ArrayList<>();
     private ArrayList<Mark> marks = new ArrayList<>();
     @BindString(R.string.line_chart_x) String mX;
-    @BindString(R.string.line_chart_y) String mY;
-    @BindString(R.string.line_chart_z) String mZ;
-    private LineDataHelper mHelper1, mHelper2;
-    private boolean switcher;
 
     private ValueFormatter integerFormatter = new ValueFormatter() {
         @Override
@@ -68,8 +63,6 @@ public class ChartsFragment extends BaseFragment implements View.OnLongClickList
 
     @Override
     protected void initViews() {
-        mChartLc1.setOnLongClickListener(this);
-        switcher = true;
         mProgressDialog =
                 ProgressDialog.show(getActivity(), StringUtils.EMPTY, getString(R.string.loading));
         String day = DateTimeUtils.getYesterday();
@@ -77,9 +70,8 @@ public class ChartsFragment extends BaseFragment implements View.OnLongClickList
     }
 
     private void setDataForLineChart() {
-        mHelper1 = new LineDataHelper(data, mX);
-        mHelper2 = new LineDataHelper(data, mX, mY, mZ);
-        mChartLc1.setData(mHelper1.getLineData());
+        LineDataHelper helper = new LineDataHelper(data, mX);
+        mChartLc1.setData(helper.getLineData());
         if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
         mChartLc1.setHighlightEnabled(false);
         mChartLc1.animateX(2500);
@@ -91,26 +83,6 @@ public class ChartsFragment extends BaseFragment implements View.OnLongClickList
         if (isAdded()) mChartBc2.setDescription(getString(R.string.bar_chart_desc));
         mChartBc2.setHighlightEnabled(false);
         mChartBc2.animateXY(2500, 2500);
-    }
-
-    @Override
-    public boolean onLongClick(View v) {
-        //// TODO: 17.11.2015 delete this
-        if (v.getId() == R.id.fragment_charts__chart1) {
-            switcher = !switcher;
-            showLineChart();
-            return true;
-        }
-        return false;
-    }
-
-    private void showLineChart() {
-        if (switcher) {
-            mChartLc1.setData(mHelper1.getLineData());
-        } else {
-            mChartLc1.setData(mHelper2.getLineData());
-        }
-        mChartLc1.animateX(2500);
     }
 
     class GetDataCallback implements Callback<GetDataResponse> {
