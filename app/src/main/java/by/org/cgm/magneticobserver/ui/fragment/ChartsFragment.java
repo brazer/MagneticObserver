@@ -38,7 +38,6 @@ public class ChartsFragment extends BaseFragment {
     @Bind(R.id.fragment_charts__chart1) LineChart mChartLc1;
     @Bind(R.id.fragment_charts__chart2) BarChart mChartBc2;
     private ProgressDialog mProgressDialog;
-    private ArrayList<Data> data = new ArrayList<>();
     private ArrayList<Mark> marks = new ArrayList<>();
     @BindString(R.string.line_chart_x) String mX;
 
@@ -70,7 +69,10 @@ public class ChartsFragment extends BaseFragment {
     }
 
     private void setDataForLineChart() {
-        LineDataHelper helper = new LineDataHelper(data, mX);
+        ArrayList<Data> d = new ArrayList<Data>();
+
+        //todo d.addAll(AppCache.getInstance().getData2());
+        LineDataHelper helper = new LineDataHelper(d, mX);
         mChartLc1.setData(helper.getLineData());
         if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
         mChartLc1.setHighlightEnabled(false);
@@ -89,8 +91,7 @@ public class ChartsFragment extends BaseFragment {
 
         @Override
         public void success(GetDataResponse getDataResponse, Response response) {
-            data = getDataResponse;
-            AppCache.getInstance().setData(getDataResponse);
+            AppCache.getInstance().setData2(getDataResponse);
             API.getInstance().getService().getMiddleRequest(new GetMiddleCallback());
         }
 

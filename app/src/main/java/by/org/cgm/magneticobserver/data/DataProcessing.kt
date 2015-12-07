@@ -36,7 +36,7 @@ class DataProcessing() {
 
     fun calculate() {
         middleVals = AppCache.getInstance().middle
-        val data = AppCache.getInstance().data
+        val data = AppCache.getInstance().data2
         var count = 0
         val values = ArrayList<Data>()
         while (count < data!!.size()) {
