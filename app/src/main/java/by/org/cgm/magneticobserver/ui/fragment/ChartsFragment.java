@@ -40,7 +40,7 @@ public class ChartsFragment extends BaseFragment {
     private ProgressDialog mProgressDialog;
     private ArrayList<Data> data = new ArrayList<>();
     private ArrayList<Mark> marks = new ArrayList<>();
-    @BindString(R.string.line_chart_x) String mX;
+    @BindString(R.string.line_chart_H) String mX;
 
     private ValueFormatter integerFormatter = new ValueFormatter() {
         @Override

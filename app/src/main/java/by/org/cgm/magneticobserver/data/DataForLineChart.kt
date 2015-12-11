@@ -53,7 +53,7 @@ class LineDataHelper {
     private val dataSets = ArrayList<LineDataSet>()
 
     constructor(data: ArrayList<Data>, mX: String) {
-        val rmsVals = getRMSVals(data)
+        val rmsVals = getRmsOfTwoVals(data)
         val avr = getAverage(rmsVals)
         for (i in data.indices) {
             xVals.add(
@@ -66,10 +66,36 @@ class LineDataHelper {
         dataSets.add(getDataSet(y1Vals, StringUtils.formatDecimals(mX, avr.toFloat()), Color.RED))
     }
 
-    private fun getRMSVals(data: ArrayList<Data>) : DoubleArray {
+    private fun getRmsOfTwoVals(data: ArrayList<Data>) : DoubleArray {
         val rmsVals = DoubleArray(data.size())
         for (i in data.indices) {
-            rmsVals[i] = (Math.sqrt(data[i].x*data[i].x + data[i].z*data[i].z))
+            rmsVals[i] = (Math.sqrt(data[i].x*data[i].x + data[i].y*data[i].y))
+        }
+        return rmsVals
+    }
+
+    constructor(data: ArrayList<Data>, mX: String, mY: String) {
+        val rmsVals1 = getRmsOfTwoVals(data)
+        val rmsVals2 = getRmsOfThreeVals(data)
+        val avrX = getAverage(rmsVals1)
+        val avrY = getAverage(rmsVals2)
+        for (i in data.indices) {
+            xVals.add(
+                    data[i].date + " "
+                            + StringUtils.toDoubleDigits(data[i].hour) + ":"
+                            + StringUtils.toDoubleDigits(data[i].minute)
+            )
+            y1Vals.add(Entry((rmsVals1[i] - avrX).toFloat(), i))
+            y2Vals.add(Entry((rmsVals2[i] - avrY).toFloat(), i))
+        }
+        dataSets.add(getDataSet(y1Vals, StringUtils.formatDecimals(mX, avrX.toFloat()), Color.RED))
+        dataSets.add(getDataSet(y2Vals, StringUtils.formatDecimals(mY, avrY.toFloat()), Color.BLUE))
+    }
+
+    private fun getRmsOfThreeVals(data: ArrayList<Data>) : DoubleArray {
+        val rmsVals = DoubleArray(data.size())
+        for (i in data.indices) {
+            rmsVals[i] = (Math.sqrt(data[i].x*data[i].x + data[i].y*data[i].y + data[i].z*data[i].z))
         }
         return rmsVals
     }
