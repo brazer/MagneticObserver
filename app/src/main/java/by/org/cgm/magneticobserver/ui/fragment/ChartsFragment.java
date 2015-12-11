@@ -41,7 +41,6 @@ public class ChartsFragment extends BaseFragment {
     private ArrayList<Data> data = new ArrayList<>();
     private ArrayList<Mark> marks = new ArrayList<>();
     @BindString(R.string.line_chart_H) String mX;
-    @BindString(R.string.line_chart_B) String mY;
 
     private ValueFormatter integerFormatter = new ValueFormatter() {
         @Override
@@ -71,7 +70,7 @@ public class ChartsFragment extends BaseFragment {
     }
 
     private void setDataForLineChart() {
-        LineDataHelper helper = new LineDataHelper(data, mX, mY);
+        LineDataHelper helper = new LineDataHelper(data, mX);
         mChartLc1.setData(helper.getLineData());
         if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
         mChartLc1.setHighlightEnabled(false);
@@ -108,7 +107,6 @@ public class ChartsFragment extends BaseFragment {
         @Override
         public void success(GetDataResponse getDataResponse, Response response) {
             mProgressDialog.dismiss();
-            mProgressDialog = null;
             AppCache.getInstance().setMiddle(getDataResponse);
             Mark.reset();
             DataProcessing dataProcessing = new DataProcessing();
