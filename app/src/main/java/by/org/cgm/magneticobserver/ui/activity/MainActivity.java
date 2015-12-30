@@ -140,6 +140,7 @@ public class MainActivity extends BaseActivity implements MessageFragment.OnShow
 
     @Override
     public void onShowChartsFragment() {
+        FragmentUtils.popFragment(this);
         showChartsFragment();
     }
 }
