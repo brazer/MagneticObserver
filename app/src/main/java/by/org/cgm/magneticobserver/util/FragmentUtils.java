@@ -29,12 +29,4 @@ public class FragmentUtils {
         transaction.commit();
     }
 
-    public static void popFragment(final FragmentActivity activity) {
-        final FragmentManager manager = activity.getSupportFragmentManager();
-        final int backStackEntries = manager.getBackStackEntryCount();
-        if (backStackEntries > 1) {
-            manager.popBackStack();
-        }
-    }
-
 }

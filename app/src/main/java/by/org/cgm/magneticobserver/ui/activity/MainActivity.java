@@ -30,9 +30,11 @@ import by.org.cgm.magneticobserver.util.FragmentUtils;
 public class MainActivity extends BaseActivity implements MessageFragment.OnShowChartsListener {
 
     private final String TAG = MainActivity.class.getSimpleName();
+    private final String CHARTS_SHOW = "charts";
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private MagMessage mMessage;
+    private boolean wasChartsFragmentAddedInStack = false;
 
     @Override
     protected int getLayoutRes() {
@@ -40,8 +42,19 @@ public class MainActivity extends BaseActivity implements MessageFragment.OnShow
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(CHARTS_SHOW, wasChartsFragmentAddedInStack);
+    }
+
+    @Override
     protected void readArgs(Intent args) {
         mMessage = (MagMessage) args.getSerializableExtra(MagMessage.TAG);
+    }
+
+    @Override
+    protected void readSavedInstanceState(Bundle state) {
+        wasChartsFragmentAddedInStack = state.getBoolean(CHARTS_SHOW);
     }
 
     @Override
@@ -64,8 +77,10 @@ public class MainActivity extends BaseActivity implements MessageFragment.OnShow
             startService(intent);
         }
 
-        if (mMessage != null) showMessageFragment(mMessage);
-        else showChartsFragment();
+        if (!wasChartsFragmentAddedInStack) {
+            if (mMessage != null) showMessageFragment(mMessage);
+            else showChartsFragment();
+        }
     }
 
     @Override
@@ -140,7 +155,8 @@ public class MainActivity extends BaseActivity implements MessageFragment.OnShow
 
     @Override
     public void onShowChartsFragment() {
-        FragmentUtils.popFragment(this);
-        showChartsFragment();
+        wasChartsFragmentAddedInStack = true;
+        Fragment fragment = new ChartsFragment();
+        FragmentUtils.addFragment(this, R.id.container, fragment, FragmentTags.CHARTS, true);
     }
 }
