@@ -62,16 +62,28 @@ public class ChartsFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-        mProgressDialog =
-                ProgressDialog.show(getActivity(), StringUtils.EMPTY, getString(R.string.loading));
-        String day = DateTimeUtils.getYesterday();
-        API.getInstance().getService().getDataRequest(day, new GetDataCallback());
+        //// TODO: 31.12.2015 update cache
+        if (AppCache.getInstance().isDataEmpty()) {
+            mProgressDialog =
+                    ProgressDialog.show(getActivity(), StringUtils.EMPTY, getString(R.string.loading));
+            String day = DateTimeUtils.getYesterday();
+            API.getInstance().getService().getDataRequest(day, new GetDataCallback());
+        } else {
+            calculateAndShowCharts();
+        }
+    }
+
+    private void calculateAndShowCharts() {
+        Mark.reset();
+        DataProcessing dataProcessing = new DataProcessing();
+        dataProcessing.calculate();
+        marks = dataProcessing.getMagMarks();
+        setDataForLineChart();
+        setDataForBarChart();
     }
 
     private void setDataForLineChart() {
-        ArrayList<Data> d = new ArrayList<Data>();
-
-        //todo d.addAll(AppCache.getInstance().getData2());
+        ArrayList<Data> d = new ArrayList<>(AppCache.getInstance().readData());
         LineDataHelper helper = new LineDataHelper(d, mX);
         mChartLc1.setData(helper.getLineData());
         if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
@@ -91,7 +103,7 @@ public class ChartsFragment extends BaseFragment {
 
         @Override
         public void success(GetDataResponse getDataResponse, Response response) {
-            AppCache.getInstance().setData2(getDataResponse);
+            AppCache.getInstance().writeData(getDataResponse);
             API.getInstance().getService().getMiddleRequest(new GetMiddleCallback());
         }
 
@@ -108,13 +120,8 @@ public class ChartsFragment extends BaseFragment {
         @Override
         public void success(GetDataResponse getDataResponse, Response response) {
             mProgressDialog.dismiss();
-            AppCache.getInstance().setMiddle(getDataResponse);
-            Mark.reset();
-            DataProcessing dataProcessing = new DataProcessing();
-            dataProcessing.calculate();
-            marks = dataProcessing.getMagMarks();
-            setDataForLineChart();
-            setDataForBarChart();
+            AppCache.getInstance().writeMiddle(getDataResponse);
+            calculateAndShowCharts();
         }
 
         @Override
