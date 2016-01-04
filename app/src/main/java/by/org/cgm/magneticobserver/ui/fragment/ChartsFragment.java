@@ -39,7 +39,7 @@ public class ChartsFragment extends BaseFragment {
     @Bind(R.id.fragment_charts__chart2) BarChart mChartBc2;
     private ProgressDialog mProgressDialog;
     private ArrayList<Mark> mMarks = new ArrayList<>();
-    @BindString(R.string.line_chart_x) String mX;
+    @BindString(R.string.line_chart_H) String mX;
 
     private ValueFormatter integerFormatter = new ValueFormatter() {
         @Override
