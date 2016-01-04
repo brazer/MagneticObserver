@@ -26,9 +26,11 @@ public class AppCache {
     private String[] levels;
     @Setter @Getter
     private String[] shortLevels;
+    @Setter @Getter
+    private boolean neededToUpdate = true;
 
-    private AppCache(Context context) { //// FIXME: 31.12.2015 realm migration
-        mRealm = Realm.getInstance(context);
+    private AppCache(Context context) {
+        mRealm = Realm.getInstance(context); // without migration
     }
 
     public static void initialize(Context context) {
