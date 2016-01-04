@@ -24,6 +24,7 @@ android {
     packagingOptions{
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -53,6 +54,7 @@ dependencies {
     compile 'com.appyvet:materialrangebar:1.1'
     compile 'com.android.support:support-annotations:23.1.0'
     compile 'net.danlew:android.joda:2.9.0'
+    compile 'io.realm:realm-android:0.85.0'
 }
 
 buildscript {

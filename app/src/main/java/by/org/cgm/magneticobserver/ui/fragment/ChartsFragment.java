@@ -38,9 +38,8 @@ public class ChartsFragment extends BaseFragment {
     @Bind(R.id.fragment_charts__chart1) LineChart mChartLc1;
     @Bind(R.id.fragment_charts__chart2) BarChart mChartBc2;
     private ProgressDialog mProgressDialog;
-    private ArrayList<Data> data = new ArrayList<>();
-    private ArrayList<Mark> marks = new ArrayList<>();
-    @BindString(R.string.line_chart_H) String mX;
+    private ArrayList<Mark> mMarks = new ArrayList<>();
+    @BindString(R.string.line_chart_x) String mX;
 
     private ValueFormatter integerFormatter = new ValueFormatter() {
         @Override
@@ -63,14 +62,29 @@ public class ChartsFragment extends BaseFragment {
 
     @Override
     protected void initViews() {
-        mProgressDialog =
-                ProgressDialog.show(getActivity(), StringUtils.EMPTY, getString(R.string.loading));
-        String day = DateTimeUtils.getYesterday();
-        API.getInstance().getService().getDataRequest(day, new GetDataCallback());
+        if (AppCache.getInstance().isNeededToUpdate() || AppCache.getInstance().isDataEmpty()) {
+            mProgressDialog =
+                    ProgressDialog.show(getActivity(), StringUtils.EMPTY, getString(R.string.loading));
+            String day = DateTimeUtils.getYesterday();
+            API.getInstance().getService().getDataRequest(day, new GetDataCallback());
+            AppCache.getInstance().setNeededToUpdate(false);
+        } else {
+            calculateAndShowCharts();
+        }
+    }
+
+    private void calculateAndShowCharts() {
+        Mark.reset();
+        DataProcessing dataProcessing = new DataProcessing();
+        dataProcessing.calculate();
+        mMarks = dataProcessing.getMagMarks();
+        setDataForLineChart();
+        setDataForBarChart();
     }
 
     private void setDataForLineChart() {
-        LineDataHelper helper = new LineDataHelper(data, mX);
+        ArrayList<Data> d = new ArrayList<>(AppCache.getInstance().readData());
+        LineDataHelper helper = new LineDataHelper(d, mX);
         mChartLc1.setData(helper.getLineData());
         if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
         mChartLc1.setHighlightEnabled(false);
@@ -78,7 +92,7 @@ public class ChartsFragment extends BaseFragment {
     }
 
     private void setDataForBarChart() {
-        BarDataHelper helper = new BarDataHelper(marks, integerFormatter);
+        BarDataHelper helper = new BarDataHelper(mMarks, integerFormatter);
         mChartBc2.setData(helper.getBarData());
         if (isAdded()) mChartBc2.setDescription(getString(R.string.bar_chart_desc));
         mChartBc2.setHighlightEnabled(false);
@@ -89,8 +103,7 @@ public class ChartsFragment extends BaseFragment {
 
         @Override
         public void success(GetDataResponse getDataResponse, Response response) {
-            data = getDataResponse;
-            AppCache.getInstance().setData(getDataResponse);
+            AppCache.getInstance().writeData(getDataResponse);
             API.getInstance().getService().getMiddleRequest(new GetMiddleCallback());
         }
 
@@ -107,13 +120,8 @@ public class ChartsFragment extends BaseFragment {
         @Override
         public void success(GetDataResponse getDataResponse, Response response) {
             mProgressDialog.dismiss();
-            AppCache.getInstance().setMiddle(getDataResponse);
-            Mark.reset();
-            DataProcessing dataProcessing = new DataProcessing();
-            dataProcessing.calculate();
-            marks = dataProcessing.getMagMarks();
-            setDataForLineChart();
-            setDataForBarChart();
+            AppCache.getInstance().writeMiddle(getDataResponse);
+            calculateAndShowCharts();
         }
 
         @Override

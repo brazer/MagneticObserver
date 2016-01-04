@@ -1,31 +1,30 @@
 package by.org.cgm.magneticobserver.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.realm.RealmObject;
 
 /**
  * Author: Anatol Salanevich
- * Date: 01.10.2015
+ * Date: 31.12.2015
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Data extends RealmObject {
+public class MiddleForRealm extends RealmObject {
 
-    @JsonProperty("date")
     private String date;
-    @JsonProperty("hour")
     private int hour;
-    @JsonProperty("minute")
     private int minute;
-    @JsonProperty("x")
     private double x;
-    @JsonProperty("y")
     private double y;
-    @JsonProperty("z")
     private double z;
+
+    public MiddleForRealm() {}
+
+    public MiddleForRealm(Data data) {
+        date = data.getDate();
+        hour = data.getHour();
+        minute = data.getMinute();
+        x = data.getX();
+        y = data.getY();
+        z = data.getZ();
+    }
 
     public String getDate() {
         return date;
@@ -74,4 +73,20 @@ public class Data extends RealmObject {
     public void setZ(double z) {
         this.z = z;
     }
+
+    public static MiddleForRealm convert(Data data) {
+        return new MiddleForRealm(data);
+    }
+
+    public static Data convert(MiddleForRealm m) {
+        Data d = new Data();
+        d.setDate(m.getDate());
+        d.setHour(m.getHour());
+        d.setMinute(m.getMinute());
+        d.setX(m.getX());
+        d.setY(m.getY());
+        d.setZ(m.getZ());
+        return d;
+    }
+
 }
