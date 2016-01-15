@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "by.org.cgm.magneticobserver"
@@ -25,6 +25,7 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'LICENSE.txt'
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -55,6 +56,8 @@ dependencies {
     compile 'com.android.support:support-annotations:23.1.0'
     compile 'net.danlew:android.joda:2.9.0'
     compile 'io.realm:realm-android:0.85.0'
+
+    testCompile 'junit:junit:4.12'
 }
 
 buildscript {

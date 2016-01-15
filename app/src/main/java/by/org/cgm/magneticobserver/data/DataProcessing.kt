@@ -41,7 +41,7 @@ class DataProcessing() {
         val values = ArrayList<Data>()
         while (count < data!!.size()) {
             val mark = Mark()
-            mark.begin = data[count].date + " " + StringUtils.toDoubleDigits(data[count].hour) + "" +
+            mark.begin = data[count].date + " " + StringUtils.toDoubleDigits(data[count].hour) +
                     ":" + StringUtils.toDoubleDigits(data[count].minute)
             values.clear()
             for (j in 0..PERIOD_IN_MINUTES - 1) {
@@ -66,20 +66,47 @@ class DataProcessing() {
         var difZ : Double
         for (i in values!!.indices)
         {
-            difX = Math.abs(middleVals[count + i].x - values[i].x)
+            difX = Math.abs(middleVals[count + i].x - getValX(values, i))
             if (difX > maxDifX) maxDifX = difX
-            difY = Math.abs(middleVals[count + i].y - values[i].y)
+            difY = Math.abs(middleVals[count + i].y - getValY(values, i))
             if (difY > maxDifY) maxDifY = difY
-            difZ = Math.abs(middleVals[count + i].z - values[i].z)
+            difZ = Math.abs(middleVals[count + i].z - getValZ(values, i))
             if (difZ > maxDifZ) maxDifZ = difZ
         }
         setMarks()
     }
 
+    private fun getValX(values: ArrayList<Data>, index: Int): Double {
+        if (index==0) return values[index].x
+        if ((values[index].x / values[index-1].x) > 3) {
+            if (index == values.size() - 1) return values[index-1].x
+            return (values[index-1].x + values[index+1].x)/2
+        }
+        return values[index].x
+    }
+
+    private fun getValY(values: ArrayList<Data>, index: Int): Double {
+        if (index==0) return values[index].y
+        if ((values[index].y / values[index-1].y) > 3) {
+            if (index == values.size() - 1) return values[index-1].y
+            return (values[index-1].y + values[index+1].y)/2
+        }
+        return values[index].y
+    }
+
+    private fun getValZ(values: ArrayList<Data>, index: Int): Double {
+        if (index==0) return values[index].z
+        if ((values[index].z / values[index-1].z) > 3) {
+            if (index == values.size() - 1) return values[index-1].z
+            return (values[index-1].z + values[index+1].z)/2
+        }
+        return values[index].z
+    }
+
     private fun setMarks() {
-        markX = getMark(maxDifX);
-        markY = getMark(maxDifY);
-        markZ = getMark(maxDifZ);
+        markX = getMark(maxDifX)
+        markY = getMark(maxDifY)
+        markZ = getMark(maxDifZ)
     }
 
     private fun getMark(dif: Double) : Int {
