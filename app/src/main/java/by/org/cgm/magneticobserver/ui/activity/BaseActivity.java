@@ -22,10 +22,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutRes());
         ButterKnife.bind(this);
         readArgs(getIntent());
+        if (savedInstanceState != null) readSavedInstanceState(savedInstanceState);
         initViews();
     }
 
     protected abstract void readArgs(Intent args);
+
+    protected void readSavedInstanceState(Bundle state) { }
 
     protected abstract void initViews();
 }

@@ -19,16 +19,22 @@ public class MagneticObserverApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        sContext = this;
         JodaTimeAndroid.init(this);
         API.initialize();
-        sContext = this;
-        AppCache.initialize();
+        AppCache.initialize(sContext);
         AppCache.getInstance().setLevels(getResources().getStringArray(R.array.storm_level));
         AppCache.getInstance().setShortLevels(getResources().getStringArray(R.array.storm_short_level));
     }
 
     public static Context getContext() {
         return sContext;
+    }
+
+    @Override
+    public void onTerminate() {
+        AppCache.getInstance().finish();
+        super.onTerminate();
     }
 
 }

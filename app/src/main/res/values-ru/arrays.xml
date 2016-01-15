@@ -2,7 +2,7 @@
 <resources>
     <string-array name="storm_level">
         <item>тихо</item>
-        <item>маленькая буря</item>
+        <item>малая буря</item>
         <item>умеренная буря</item>
         <item>большая буря</item>
         <item>очень большая буря</item>

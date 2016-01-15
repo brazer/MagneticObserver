@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
+import by.org.cgm.magneticobserver.AppCache;
 import by.org.cgm.magneticobserver.R;
 import by.org.cgm.magneticobserver.model.MagMessage;
 import by.org.cgm.magneticobserver.preferences.AppPreferences;
@@ -42,7 +43,7 @@ public class CustomGcmListenerService extends GcmListenerService {
         String message = data.getString("message");
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);
-
+        AppCache.getInstance().setNeededToUpdate(true);
         /**
          * Production applications would usually process the message here.
          * Eg: - Syncing with server.
@@ -77,7 +78,7 @@ public class CustomGcmListenerService extends GcmListenerService {
      */
     private void sendNotification(String message) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(MagMessage.TAG, mMagMessage);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
