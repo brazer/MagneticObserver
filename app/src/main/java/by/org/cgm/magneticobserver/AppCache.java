@@ -1,14 +1,10 @@
 package by.org.cgm.magneticobserver;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import by.org.cgm.magneticobserver.model.Data;
 import by.org.cgm.magneticobserver.model.MiddleForRealm;
-import io.realm.Realm;
-import io.realm.RealmResults;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,8 +16,6 @@ public class AppCache {
 
     private static AppCache sInstance;
 
-    private Realm mRealm;
-
     @Setter @Getter
     private String[] levels;
     @Setter @Getter
@@ -29,12 +23,8 @@ public class AppCache {
     @Setter @Getter
     private boolean neededToUpdate = true;
 
-    private AppCache(Context context) {
-        mRealm = Realm.getInstance(context); // without migration
-    }
-
-    public static void initialize(Context context) {
-        sInstance = new AppCache(context);
+    public static void initialize() {
+        sInstance = new AppCache();
     }
 
     public static AppCache getInstance() {
@@ -46,45 +36,43 @@ public class AppCache {
         for (Data m : middle) {
             castMiddle.add(MiddleForRealm.convert(m));
         }
-        mRealm.beginTransaction();
+        /*mRealm.beginTransaction();
         mRealm.clear(MiddleForRealm.class);
         mRealm.copyToRealm(castMiddle);
-        mRealm.commitTransaction();
+        mRealm.commitTransaction();*/
     }
 
     public List<Data> readMiddle() {
-        RealmResults<MiddleForRealm> middle = mRealm.allObjects(MiddleForRealm.class);
+        /*RealmResults<MiddleForRealm> middle = mRealm.allObjects(MiddleForRealm.class);
         if (middle.isEmpty()) {
             return null;
-        }
+        }*/
         List<Data> data = new ArrayList<>();
-        for (MiddleForRealm m : middle) {
+        /*for (MiddleForRealm m : middle) {
             data.add(MiddleForRealm.convert(m));
-        }
+        }*/
         return data;
     }
 
     public void writeData(ArrayList<Data> data) {
-        mRealm.beginTransaction();
+        /*mRealm.beginTransaction();
         mRealm.clear(Data.class);
         mRealm.copyToRealm(data);
-        mRealm.commitTransaction();
+        mRealm.commitTransaction();*/
     }
 
     public List<Data> readData() {
-        RealmResults<Data> data = mRealm.allObjects(Data.class);
+       /* RealmResults<Data> data = mRealm.allObjects(Data.class);
         if (data.isEmpty()) {
             return null;
         }
-        return data.subList(0, data.size());
+        return data.subList(0, data.size());*/
+        return null;
     }
 
     public boolean isDataEmpty() {
-        return mRealm.allObjects(Data.class).isEmpty() || mRealm.allObjects(MiddleForRealm.class).isEmpty();
-    }
-
-    public void finish() {
-        mRealm.close();
+        //return mRealm.allObjects(Data.class).isEmpty() || mRealm.allObjects(MiddleForRealm.class).isEmpty();
+        return true;
     }
 
 }

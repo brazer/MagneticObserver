@@ -1,12 +1,14 @@
 package by.org.cgm.magneticobserver.model;
 
-import io.realm.RealmObject;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Author: Anatol Salanevich
  * Date: 31.12.2015
  */
-public class MiddleForRealm extends RealmObject {
+@Deprecated
+public class MiddleForRealm implements Parcelable {
 
     private String date;
     private int hour;
@@ -25,6 +27,27 @@ public class MiddleForRealm extends RealmObject {
         y = data.getY();
         z = data.getZ();
     }
+
+    protected MiddleForRealm(Parcel in) {
+        date = in.readString();
+        hour = in.readInt();
+        minute = in.readInt();
+        x = in.readDouble();
+        y = in.readDouble();
+        z = in.readDouble();
+    }
+
+    public static final Creator<MiddleForRealm> CREATOR = new Creator<MiddleForRealm>() {
+        @Override
+        public MiddleForRealm createFromParcel(Parcel in) {
+            return new MiddleForRealm(in);
+        }
+
+        @Override
+        public MiddleForRealm[] newArray(int size) {
+            return new MiddleForRealm[size];
+        }
+    };
 
     public String getDate() {
         return date;
@@ -79,7 +102,8 @@ public class MiddleForRealm extends RealmObject {
     }
 
     public static Data convert(MiddleForRealm m) {
-        Data d = new Data();
+        //// TODO: 16.01.2016 add parcel
+        Data d = new Data(null);
         d.setDate(m.getDate());
         d.setHour(m.getHour());
         d.setMinute(m.getMinute());
@@ -89,4 +113,19 @@ public class MiddleForRealm extends RealmObject {
         return d;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeString(date);
+        dest.writeInt(hour);
+        dest.writeInt(minute);
+        dest.writeDouble(x);
+        dest.writeDouble(y);
+        dest.writeDouble(z);
+    }
 }
