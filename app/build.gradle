@@ -40,7 +40,9 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.google.android.gms:play-services-gcm:8.3.0'
+    compile ('com.google.android.gms:play-services-gcm:8.3.0') {
+        exclude module: "play-services-measurement"
+    }
     compile 'com.jakewharton:butterknife:7.0.1'
     provided 'org.projectlombok:lombok:1.16.6'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
