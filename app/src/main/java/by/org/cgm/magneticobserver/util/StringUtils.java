@@ -1,6 +1,8 @@
 package by.org.cgm.magneticobserver.util;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
 
 import by.org.cgm.magneticobserver.model.MagMessage;
 
@@ -11,10 +13,15 @@ import by.org.cgm.magneticobserver.model.MagMessage;
 public class StringUtils {
 
     public static final String EMPTY = "";
-    private static final Gson GSON = new Gson();
 
     public static MagMessage parse(String json) {
-        return GSON.fromJson(json, MagMessage.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readValue(json.replace('\'', '"'), MagMessage.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static String toDoubleDigits(int val) {

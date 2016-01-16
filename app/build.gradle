@@ -48,10 +48,14 @@ repositories {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.google.android.gms:play-services-gcm:8.3.0'
+    compile ('com.google.android.gms:play-services-gcm:8.3.0') {
+        exclude module: "play-services-measurement"
+    }
     compile 'com.jakewharton:butterknife:7.0.1'
     provided 'org.projectlombok:lombok:1.16.6'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile ('com.squareup.retrofit:retrofit:1.9.0') {
+        exclude module: "gson"
+    }
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile(
             [group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.4.1'],
@@ -63,7 +67,6 @@ dependencies {
     compile 'com.appyvet:materialrangebar:1.1'
     compile 'com.android.support:support-annotations:23.1.0'
     compile 'net.danlew:android.joda:2.9.0'
-    compile 'io.realm:realm-android:0.85.0'
 
     testCompile 'junit:junit:4.12'
 }

@@ -83,7 +83,7 @@ public class ChartsFragment extends BaseFragment {
     }
 
     private void setDataForLineChart() {
-        ArrayList<Data> d = new ArrayList<>(AppCache.getInstance().readData());
+        ArrayList<Data> d = AppCache.getInstance().getData();
         LineDataHelper helper = new LineDataHelper(d, mX);
         mChartLc1.setData(helper.getLineData());
         if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
@@ -103,7 +103,7 @@ public class ChartsFragment extends BaseFragment {
 
         @Override
         public void success(GetDataResponse getDataResponse, Response response) {
-            AppCache.getInstance().writeData(getDataResponse);
+            AppCache.getInstance().setData(getDataResponse);
             API.getInstance().getService().getMiddleRequest(new GetMiddleCallback());
         }
 
@@ -120,7 +120,7 @@ public class ChartsFragment extends BaseFragment {
         @Override
         public void success(GetDataResponse getDataResponse, Response response) {
             mProgressDialog.dismiss();
-            AppCache.getInstance().writeMiddle(getDataResponse);
+            AppCache.getInstance().setMiddle(getDataResponse);
             calculateAndShowCharts();
         }
 
