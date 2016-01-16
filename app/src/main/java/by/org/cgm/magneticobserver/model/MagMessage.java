@@ -1,5 +1,9 @@
 package by.org.cgm.magneticobserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
@@ -15,14 +19,24 @@ import lombok.Getter;
  * Author: Anatol Salanevich
  * Date: 23.09.2015
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MagMessage implements Serializable {
-// I know this is not really model, but I'm too lazy & the app is too small to correct it.
+
     public static final String TAG = "MagMessage";
 
-    @Getter private String begin;
-    @Getter private String end;
-    @Getter private String date;
-    @Getter private int value;
+    @Getter
+    @JsonProperty("begin")
+    private String begin;
+    @Getter
+    @JsonProperty("end")
+    private String end;
+    @Getter
+    @JsonProperty("date")
+    private String date;
+    @Getter
+    @JsonProperty("value")
+    private int value;
 
     public void convertToLocalTime() {
         begin = convert(begin);

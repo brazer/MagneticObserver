@@ -51,6 +51,7 @@ public class CustomGcmListenerService extends GcmListenerService {
          *     - Update UI.
          */
         mMagMessage = StringUtils.parse(message);
+        assert mMagMessage != null;
         mMagMessage.convertToLocalTime();
         processMessage();
     }
