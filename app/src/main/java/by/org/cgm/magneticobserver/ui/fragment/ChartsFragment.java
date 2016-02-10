@@ -88,7 +88,7 @@ public class ChartsFragment extends BaseFragment {
         mChartLc1.setData(helper.getLineData());
         if (isAdded()) mChartLc1.setDescription(getString(R.string.line_chart_desc));
         mChartLc1.setHighlightEnabled(false);
-        mChartLc1.animateX(2500);
+        mChartLc1.invalidate();
     }
 
     private void setDataForBarChart() {
@@ -96,7 +96,7 @@ public class ChartsFragment extends BaseFragment {
         mChartBc2.setData(helper.getBarData());
         if (isAdded()) mChartBc2.setDescription(getString(R.string.bar_chart_desc));
         mChartBc2.setHighlightEnabled(false);
-        mChartBc2.animateXY(2500, 2500);
+        mChartBc2.invalidate();
     }
 
     class GetDataCallback implements Callback<GetDataResponse> {
