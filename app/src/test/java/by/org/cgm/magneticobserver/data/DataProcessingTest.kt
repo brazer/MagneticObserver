@@ -3,7 +3,7 @@ package by.org.cgm.magneticobserver.data
 import by.org.cgm.magneticobserver.AppCache
 import by.org.cgm.magneticobserver.model.Data
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.io.IOException
@@ -38,13 +38,13 @@ class DataProcessingTest {
 
     @Test
     fun testCalculate() {
-        assertEquals(364, AppCache.getInstance().middle.size())
+        assertEquals(364, AppCache.getInstance().middle.size)
         assertEquals(17461.5, AppCache.getInstance().middle[0].x, 0.0)
-        assertEquals(420, AppCache.getInstance().data.size())
+        assertEquals(420, AppCache.getInstance().data.size)
         assertEquals(2568.4, AppCache.getInstance().data[0].y, 0.0)
         val p = DataProcessing()
         p.calculate()
-        assertEquals(2, p.getMagMarks().size())
+        assertEquals(2, p.getMagMarks().size)
         assertEquals(3, p.getMagMarks()[0].level)
         assertEquals(2, p.getMagMarks()[1].level)
     }

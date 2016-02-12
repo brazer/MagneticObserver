@@ -16,7 +16,7 @@
 #   public *;
 #}
 -dontwarn butterknife.internal.**
--dontwarn kotlin.dom.**
+-dontwarn kotlin.**
 -dontwarn retrofit.**
 -dontwarn com.fasterxml.jackson.databind.ext.DOMSerializer
 -dontwarn com.google.android.gms.gcm.zza
