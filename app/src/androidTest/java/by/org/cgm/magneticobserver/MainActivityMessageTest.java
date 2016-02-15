@@ -28,7 +28,6 @@ import static org.junit.Assert.assertNotNull;
 @SmallTest
 public class MainActivityMessageTest {
 
-    private final String MESSAGE = "{'begin':'11:25','end':'12:24','date':'2016-01-16','value':2}";
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule =
             new ActivityTestRule<>(MainActivity.class, true, false);
@@ -36,7 +35,8 @@ public class MainActivityMessageTest {
     @Before
     public void setUp() throws Exception {
         Intent startIntent = new Intent();
-        startIntent.putExtra(MagMessage.TAG, StringUtils.parse(MESSAGE));
+        String message = "{'begin':'11:25','end':'12:24','date':'2016-01-16','value':2}";
+        startIntent.putExtra(MagMessage.TAG, StringUtils.parse(message));
         mActivityTestRule.launchActivity(startIntent);
     }
 
