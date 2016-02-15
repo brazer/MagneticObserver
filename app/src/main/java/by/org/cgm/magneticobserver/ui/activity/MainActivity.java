@@ -7,6 +7,8 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -24,6 +26,7 @@ import by.org.cgm.magneticobserver.model.MagMessage;
 import by.org.cgm.magneticobserver.service.RegistrationIntentService;
 import by.org.cgm.magneticobserver.ui.fragment.ChartsFragment;
 import by.org.cgm.magneticobserver.ui.fragment.MessageFragment;
+import by.org.cgm.magneticobserver.util.EspressoIdlingResource;
 import by.org.cgm.magneticobserver.util.FragmentTags;
 import by.org.cgm.magneticobserver.util.FragmentUtils;
 
@@ -159,4 +162,10 @@ public class MainActivity extends BaseActivity implements MessageFragment.OnShow
         Fragment fragment = new ChartsFragment();
         FragmentUtils.addFragment(this, R.id.container, fragment, FragmentTags.CHARTS, true);
     }
+
+    @VisibleForTesting
+    public IdlingResource getCountingIdlingResource() {
+        return EspressoIdlingResource.getIdlingResource();
+    }
+
 }

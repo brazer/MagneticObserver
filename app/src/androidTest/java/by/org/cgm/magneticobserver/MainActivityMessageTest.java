@@ -16,6 +16,7 @@ import by.org.cgm.magneticobserver.util.StringUtils;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertNotNull;
@@ -48,6 +49,7 @@ public class MainActivityMessageTest {
         onView(withId(R.id.fragment_message__end)).check(matches(withText("12:24")));
         String level = AppCache.getInstance().getLevels()[1];
         onView(withId(R.id.fragment_message__level)).check(matches(withText(level)));
+        onView(withId(R.id.show_charts)).check(matches(isDisplayed()));
     }
 
 }

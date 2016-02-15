@@ -25,6 +25,7 @@ import by.org.cgm.magneticobserver.model.Mark;
 import by.org.cgm.magneticobserver.model.response.GetDataResponse;
 import by.org.cgm.magneticobserver.network.API;
 import by.org.cgm.magneticobserver.util.DateTimeUtils;
+import by.org.cgm.magneticobserver.util.EspressoIdlingResource;
 import by.org.cgm.magneticobserver.util.StringUtils;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -63,6 +64,7 @@ public class ChartsFragment extends BaseFragment {
     @Override
     protected void initViews() {
         if (AppCache.getInstance().isNeededToUpdate() || AppCache.getInstance().isDataEmpty()) {
+            EspressoIdlingResource.increment();
             mProgressDialog =
                     ProgressDialog.show(getActivity(), StringUtils.EMPTY, getString(R.string.loading));
             String day = DateTimeUtils.getYesterday();
@@ -109,6 +111,7 @@ public class ChartsFragment extends BaseFragment {
 
         @Override
         public void failure(RetrofitError error) {
+            EspressoIdlingResource.decrement();
             mProgressDialog.dismiss();
             Log.d(GetDataCallback.class.getSimpleName(), error.getMessage());
             Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
@@ -119,6 +122,7 @@ public class ChartsFragment extends BaseFragment {
 
         @Override
         public void success(GetDataResponse getDataResponse, Response response) {
+            EspressoIdlingResource.decrement();
             mProgressDialog.dismiss();
             AppCache.getInstance().setMiddle(getDataResponse);
             calculateAndShowCharts();
@@ -126,6 +130,7 @@ public class ChartsFragment extends BaseFragment {
 
         @Override
         public void failure(RetrofitError error) {
+            EspressoIdlingResource.decrement();
             mProgressDialog.dismiss();
             Log.d(GetMiddleCallback.class.getSimpleName(), error.getMessage());
             Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
