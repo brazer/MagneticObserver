@@ -8,7 +8,7 @@ import by.org.cgm.magneticobserver.R;
  * Author: Anatol Salanevich
  * Date: 07.10.2015
  */
-public class ColorUtils {
+public final class ColorUtils {
 
     public static int getColorId(int level) {
         switch (level) {

@@ -10,7 +10,7 @@ import by.org.cgm.magneticobserver.model.MagMessage;
  * Author: Anatol Salanevich
  * Date: 23.09.2015
  */
-public class StringUtils {
+public final class StringUtils {
 
     public static final String EMPTY = "";
 
