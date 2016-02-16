@@ -18,6 +18,7 @@ import by.org.cgm.magneticobserver.preferences.AppPreferences;
 import by.org.cgm.magneticobserver.preferences.PreferencesKeys;
 import by.org.cgm.magneticobserver.ui.activity.MainActivity;
 import by.org.cgm.magneticobserver.ui.dialog.RangeBarPreference;
+import by.org.cgm.magneticobserver.util.DateTimeUtils;
 import by.org.cgm.magneticobserver.util.StringUtils;
 
 /**
@@ -49,7 +50,7 @@ public class CustomGcmListenerService extends GcmListenerService {
          */
         mMagMessage = StringUtils.parse(message);
         assert mMagMessage != null;
-        mMagMessage.convertToLocalTime();
+        DateTimeUtils.convertToLocalTime(mMagMessage);
         processMessage();
     }
     // [END receive_message]
@@ -65,7 +66,7 @@ public class CustomGcmListenerService extends GcmListenerService {
              * In some cases it may be useful to show a notification indicating to the user
              * that a message was received.
              */
-            sendNotification(mMagMessage.toMessage(getString(R.string.message)));
+            sendNotification(StringUtils.toMessage(getString(R.string.message), mMagMessage.getValue()));
         }
     }
 
