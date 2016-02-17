@@ -14,9 +14,9 @@ import java.util.*
  */
 class AverageXYZ(val data : ArrayList<Data>) {
 
-    private val x = DoubleArray(data.size())
-    private val y = DoubleArray(data.size())
-    private val z = DoubleArray(data.size())
+    private val x = DoubleArray(data.size)
+    private val y = DoubleArray(data.size)
+    private val z = DoubleArray(data.size)
     var avrX = 0.0
         private set
     var avrY = 0.0
@@ -41,7 +41,7 @@ fun getAverage(array: DoubleArray) : Double {
     var sum = 0.0
     for (item in array)
         sum += item
-    return sum/array.size()
+    return sum/array.size
 }
 
 class LineDataHelper {
@@ -67,7 +67,7 @@ class LineDataHelper {
     }
 
     private fun getRmsOfTwoVals(data: ArrayList<Data>) : DoubleArray {
-        val rmsVals = DoubleArray(data.size())
+        val rmsVals = DoubleArray(data.size)
         for (i in data.indices) {
             rmsVals[i] = (Math.sqrt(data[i].x*data[i].x + data[i].y*data[i].y))
         }
@@ -93,7 +93,7 @@ class LineDataHelper {
     }
 
     private fun getRmsOfThreeVals(data: ArrayList<Data>) : DoubleArray {
-        val rmsVals = DoubleArray(data.size())
+        val rmsVals = DoubleArray(data.size)
         for (i in data.indices) {
             rmsVals[i] = (Math.sqrt(data[i].x*data[i].x + data[i].y*data[i].y + data[i].z*data[i].z))
         }

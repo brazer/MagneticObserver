@@ -39,13 +39,13 @@ class DataProcessing() {
         val data = AppCache.getInstance().data
         var count = 0
         val values = ArrayList<Data>()
-        while (count < data!!.size()) {
+        while (count < data!!.size) {
             val mark = Mark()
             mark.begin = data[count].date + " " + StringUtils.toDoubleDigits(data[count].hour) +
                     ":" + StringUtils.toDoubleDigits(data[count].minute)
             values.clear()
             for (j in 0..PERIOD_IN_MINUTES - 1) {
-                if (count == data.size()) return
+                if (count == data.size) return
                 values.add(data[count])
                 count++
             }
@@ -79,7 +79,7 @@ class DataProcessing() {
     private fun getValX(values: ArrayList<Data>, index: Int): Double {
         if (index==0) return values[index].x
         if ((values[index].x / values[index-1].x) > 3) {
-            if (index == values.size() - 1) return values[index-1].x
+            if (index == values.size - 1) return values[index-1].x
             return (values[index-1].x + values[index+1].x)/2
         }
         return values[index].x
@@ -88,7 +88,7 @@ class DataProcessing() {
     private fun getValY(values: ArrayList<Data>, index: Int): Double {
         if (index==0) return values[index].y
         if ((values[index].y / values[index-1].y) > 3) {
-            if (index == values.size() - 1) return values[index-1].y
+            if (index == values.size - 1) return values[index-1].y
             return (values[index-1].y + values[index+1].y)/2
         }
         return values[index].y
@@ -97,7 +97,7 @@ class DataProcessing() {
     private fun getValZ(values: ArrayList<Data>, index: Int): Double {
         if (index==0) return values[index].z
         if ((values[index].z / values[index-1].z) > 3) {
-            if (index == values.size() - 1) return values[index-1].z
+            if (index == values.size - 1) return values[index-1].z
             return (values[index-1].z + values[index+1].z)/2
         }
         return values[index].z

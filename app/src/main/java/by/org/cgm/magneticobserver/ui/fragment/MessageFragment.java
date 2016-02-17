@@ -13,7 +13,9 @@ import android.widget.TextView;
 import butterknife.Bind;
 import by.org.cgm.magneticobserver.R;
 import by.org.cgm.magneticobserver.model.MagMessage;
+import by.org.cgm.magneticobserver.util.ColorUtils;
 import by.org.cgm.magneticobserver.util.FragmentTags;
+import by.org.cgm.magneticobserver.util.StringUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,10 +50,14 @@ public class MessageFragment extends BaseFragment {
     @SuppressWarnings("deprecation")
     @Override
     protected void initViews() {
-        mLevelTv.setText(mMessage.getStormLevel());
+        mLevelTv.setText(StringUtils.getStormLevel(mMessage.getValue()));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mLevelTv.setBackgroundColor(getResources().getColor(mMessage.getColorId(), null));
-        } else mLevelTv.setBackgroundColor(getResources().getColor(mMessage.getColorId()));
+            mLevelTv.setBackgroundColor(getResources()
+                    .getColor(ColorUtils.getColorId(mMessage.getValue()), null));
+        } else {
+            mLevelTv.setBackgroundColor(getResources()
+                .getColor(ColorUtils.getColorId(mMessage.getValue())));
+        }
         mDateTv.setText(mMessage.getDate());
         mBeginTv.setText(mMessage.getBegin());
         mEndTv.setText(mMessage.getEnd());

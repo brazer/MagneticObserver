@@ -4,16 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
-
 import java.io.Serializable;
 
-import by.org.cgm.magneticobserver.AppCache;
-import by.org.cgm.magneticobserver.util.ColorUtils;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Author: Anatol Salanevich
@@ -25,10 +19,10 @@ public class MagMessage implements Serializable {
 
     public static final String TAG = "MagMessage";
 
-    @Getter
+    @Getter @Setter
     @JsonProperty("begin")
     private String begin;
-    @Getter
+    @Getter @Setter
     @JsonProperty("end")
     private String end;
     @Getter
@@ -37,43 +31,5 @@ public class MagMessage implements Serializable {
     @Getter
     @JsonProperty("value")
     private int value;
-
-    public void convertToLocalTime() {
-        begin = convert(begin);
-        end = convert(end);
-    }
-
-    private String convert(String time) {
-        DateTimeFormatter inputFormatter = DateTimeFormat.forPattern("HH:mm").withZoneUTC();
-        DateTime parsed = inputFormatter.parseDateTime(time);
-        DateTimeFormatter outputFormatter = DateTimeFormat.forPattern("HH:mm")
-                .withZone(DateTimeZone.forID("Europe/Minsk"));
-        return outputFormatter.print(parsed);
-    }
-
-    public String toMessage(String template) {
-        return String.format(template, getStormLevel());
-    }
-
-    public String getStormLevel() {
-        String levels[] = AppCache.getInstance().getLevels();
-        switch (value) {
-            case 0: return levels[0];
-            case 1: return levels[0];
-            case 2: return levels[1];
-            case 3: return levels[1];
-            case 4: return levels[2];
-            case 5: return levels[2];
-            case 6: return levels[3];
-            case 7: return levels[3];
-            case 8: return levels[4];
-            case 9: return levels[4];
-        }
-        return "";
-    }
-
-    public int getColorId() {
-        return ColorUtils.getColorId(value);
-    }
 
 }

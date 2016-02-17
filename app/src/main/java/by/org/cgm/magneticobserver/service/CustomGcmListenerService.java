@@ -8,7 +8,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 
@@ -19,6 +18,7 @@ import by.org.cgm.magneticobserver.preferences.AppPreferences;
 import by.org.cgm.magneticobserver.preferences.PreferencesKeys;
 import by.org.cgm.magneticobserver.ui.activity.MainActivity;
 import by.org.cgm.magneticobserver.ui.dialog.RangeBarPreference;
+import by.org.cgm.magneticobserver.util.DateTimeUtils;
 import by.org.cgm.magneticobserver.util.StringUtils;
 
 /**
@@ -41,8 +41,6 @@ public class CustomGcmListenerService extends GcmListenerService {
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
-        Log.d(TAG, "From: " + from);
-        Log.d(TAG, "Message: " + message);
         AppCache.getInstance().setNeededToUpdate(true);
         /**
          * Production applications would usually process the message here.
@@ -52,7 +50,7 @@ public class CustomGcmListenerService extends GcmListenerService {
          */
         mMagMessage = StringUtils.parse(message);
         assert mMagMessage != null;
-        mMagMessage.convertToLocalTime();
+        DateTimeUtils.convertToLocalTime(mMagMessage);
         processMessage();
     }
     // [END receive_message]
@@ -68,7 +66,7 @@ public class CustomGcmListenerService extends GcmListenerService {
              * In some cases it may be useful to show a notification indicating to the user
              * that a message was received.
              */
-            sendNotification(mMagMessage.toMessage(getString(R.string.message)));
+            sendNotification(StringUtils.toMessage(getString(R.string.message), mMagMessage.getValue()));
         }
     }
 
